@@ -1,0 +1,53 @@
+---
+/*
+ * Temporary home page. Replaced by task T-003 once the theme is specified in docs/DESIGN.md.
+ */
+import Base from "../layouts/Base.astro";
+import Wordmark from "../components/Wordmark.astro";
+---
+
+<Base>
+  <section class="hero">
+    <img class="hero__mark" src="/brand/mark-neon.svg" alt="" width="160" height="160" />
+    <h1>
+      <Wordmark size="hero" />
+    </h1>
+    <p class="hero__tagline">research · tools · intel</p>
+    <nav class="hero__links" aria-label="f3nri elsewhere">
+      <a href="https://github.com/f3nrilabs">GitHub</a>
+      <a href="https://x.com/f3nrilabs">X</a>
+      <a href="https://instagram.com/f3nrilabs">Instagram</a>
+      <a href="mailto:hello@f3nri.com">hello@f3nri.com</a>
+    </nav>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+    padding: var(--space-16) var(--gutter);
+    text-align: center;
+  }
+  .hero__mark {
+    width: clamp(96px, 18vw, 160px);
+    height: auto;
+  }
+  .hero__tagline {
+    margin: 0;
+    font-family: var(--font-mono);
+    color: var(--accent);
+  }
+  .hero__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4) var(--space-6);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+</style>

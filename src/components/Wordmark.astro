@@ -1,0 +1,39 @@
+---
+/**
+ * The f3nri wordmark as live text: "f3nri" + accent underscore.
+ * Never replace with an image of text, never change the font or letter spacing.
+ */
+interface Props {
+  size?: "sm" | "md" | "hero";
+}
+const { size = "md" } = Astro.props;
+---
+
+<span class:list={["wordmark", `wordmark--${size}`]} aria-label="f3nri">
+  <span aria-hidden="true">
+    f3nri<span class="wordmark__cursor">_</span>
+  </span>
+</span>
+
+<style>
+  .wordmark {
+    font-family: var(--font-mono);
+    font-weight: 800;
+    letter-spacing: var(--tracking-wordmark);
+    line-height: 1;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .wordmark__cursor {
+    color: var(--accent);
+  }
+  .wordmark--sm {
+    font-size: var(--text-xl);
+  }
+  .wordmark--md {
+    font-size: var(--text-3xl);
+  }
+  .wordmark--hero {
+    font-size: var(--text-hero);
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+import Base from "../layouts/Base.astro";
+import Wordmark from "../components/Wordmark.astro";
+---
+
+<Base title="Not found">
+  <section class="nf">
+    <p class="nf__code">404</p>
+    <h1>Nothing here.</h1>
+    <p>The page you asked for does not exist.</p>
+    <a href="/">
+      <Wordmark size="sm" />
+    </a>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: var(--gutter);
+    text-align: center;
+  }
+  .nf__code {
+    margin: 0;
+    font-family: var(--font-mono);
+    color: var(--accent);
+  }
+  .nf a {
+    text-decoration: none;
+  }
+</style>

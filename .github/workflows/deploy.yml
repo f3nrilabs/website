@@ -1,0 +1,54 @@
+# Ships main to the f3nri VPS. See docs/ARCHITECTURE.md, "Build, CI and deploy".
+# Needs org/repo secrets DEPLOY_HOST, DEPLOY_KNOWN_HOSTS, DEPLOY_SSH_KEY and repo variable SITE.
+
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run ci
+
+      - name: Ship dist/ to the VPS
+        env:
+          SITE: ${{ vars.SITE }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${DEPLOY_HOST}" ] || [ -z "${DEPLOY_SSH_KEY}" ] || [ -z "${SITE}" ]; then
+            echo "::notice::Deploy secrets or SITE variable not set yet; build passed, upload skipped."
+            exit 0
+          fi
+          test -f dist/index.html
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          tar -czf - -C dist . | ssh -o BatchMode=yes "deploy@${DEPLOY_HOST}" "deploy ${SITE} ${GITHUB_SHA}"
+
+      - name: Check the live site
+        if: vars.SITE == 'website'
+        run: |
+          sleep 3
+          curl -fsS -o /dev/null -w "f3nri.com -> HTTP %{http_code}\n" https://f3nri.com/

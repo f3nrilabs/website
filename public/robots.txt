@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://f3nri.com/sitemap-index.xml

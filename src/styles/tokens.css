@@ -54,7 +54,7 @@
   --text-3xl: clamp(2rem, 4vw, 2.75rem);
   --text-hero: clamp(3rem, 10vw, 6.5rem);
   --text-section: clamp(3rem, 7vw, 6rem);
-  --text-display: clamp(4rem, 10vw, 9.75rem);
+  --text-display: clamp(4rem, 10vw, 8.5rem);
   --text-giant: clamp(5.5rem, 15vw, 15rem);
 
   --leading-display: 0.9;

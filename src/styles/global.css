@@ -39,6 +39,11 @@ h2 {
   margin: 0;
 }
 
+/* section headings are big by default (docs/DESIGN.md, "Type"); heroes and blocks size their own */
+h2 {
+  font-size: var(--text-section);
+}
+
 h3 {
   font-family: var(--font-body);
   font-weight: 600;

@@ -58,7 +58,7 @@ Rules:
 
 | Size token                 | Value                      | Use                                          |
 | -------------------------- | -------------------------- | -------------------------------------------- |
-| `--text-display`           | clamp(4rem, 10vw, 9.75rem) | Page h1 in a hero                            |
+| `--text-display`           | clamp(4rem, 10vw, 8.5rem)  | Page h1 in a hero                            |
 | `--text-giant`             | clamp(5.5rem, 15vw, 15rem) | A product name used as the h1 or block title |
 | `--text-section`           | clamp(3rem, 7vw, 6rem)     | Section h2                                   |
 | `--text-xs` … `--text-3xl` |                            | UI and body text                             |
@@ -112,5 +112,7 @@ Only Claude Code changes `tokens.css`, and every change is recorded in this file
 
 ### Change log
 
+- **2026-11-21:** `--text-display` max lowered from 9.75rem to 8.5rem so the two-line home headline does not break into three lines on 1440 px and wider screens.
+- **2026-11-21:** every h2 now defaults to `--text-section` in `global.css`; a section heading without its own size was rendering at the browser default.
 - **T-002 (2026-11-21):** added `--page-accent` (the active colorway accent, set by `Base`, `Hero` and `ColorBlock`) and `--header-height`.
 - **T-001 (2026-11-21):** display face changed from Unbounded to Anton (ADR 0002); added colorway accents, overlay, display size, radius and wide-container tokens for the approved theme.

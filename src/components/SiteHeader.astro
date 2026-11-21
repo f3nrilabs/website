@@ -154,4 +154,11 @@ const contact = "mailto:hello@f3nri.com";
       display: block;
     }
   }
+
+  /* Keep the mark, contact and menu on one line on the narrowest screens. */
+  @media (max-width: 23rem) {
+    .home :global(.wordmark) {
+      display: none;
+    }
+  }
 </style>

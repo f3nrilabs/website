@@ -9,7 +9,7 @@ Status: `todo` · `in-progress` · `review` · `blocked` · `done`
 | T-000 | Project scaffold, rules, CI and deploy                                          | Claude Code                          | main                    | done   |            |
 | T-001 | Theme rules in `docs/DESIGN.md`, tokens, fonts, gradient images                 | Claude Code                          | claude/T-001-theme      | done   |            |
 | T-002 | Layout components: SiteHeader, SiteFooter, Hero, Pill, Button, Card, ColorBlock | Claude Code                          | claude/T-002-components | done   | T-001      |
-| T-003 | Home page                                                                       | OpenCode                             | opencode/T-003-home     | in-progress | T-002      |
+| T-003 | Home page                                                                       | OpenCode                             | opencode/T-003-home     | review | T-002      |
 | T-004 | Research: content collection, list page, post page                              | Claude Code (spec), OpenCode (build) |                         | todo   | T-002      |
 | T-005 | Products: `/products` index and the Horus page                                  | OpenCode                             |                         | todo   | T-002      |
 | T-006 | About and Contact pages                                                         | OpenCode                             |                         | todo   | T-002      |

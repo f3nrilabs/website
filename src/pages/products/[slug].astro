@@ -65,7 +65,7 @@ const problemLead = problemWords.join(" ");
 
     <section id="how" aria-labelledby="how-title">
       <h2 id="how-title" class="section__title">
-        How it works.
+        How it works
       </h2>
       <ol class="step-list">
         {steps.map((step) => (
@@ -76,10 +76,7 @@ const problemLead = problemWords.join(" ");
       </ol>
     </section>
 
-    <section aria-labelledby="features-title">
-      <h2 id="features-title" class="section__title">
-        Features.
-      </h2>
+    <section aria-label="Features">
       <ul class="feature-list">
         {features.map((feature) => (
           <Card as="li" label={feature.label} title={feature.title}>
@@ -119,10 +116,18 @@ const problemLead = problemWords.join(" ");
   }
   .problem {
     display: grid;
-    gap: var(--space-8);
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: var(--space-12);
+    align-items: start;
+  }
+  /* The 20rem track needs a single column at the smallest width. */
+  @media (max-width: 22rem) {
+    .problem {
+      grid-template-columns: 1fr;
+    }
   }
   .problem__title {
-    font-size: var(--text-3xl);
+    font-size: var(--text-section);
   }
   .problem__title span {
     color: var(--page-accent);
@@ -135,6 +140,13 @@ const problemLead = problemWords.join(" ");
   .problem__body p {
     margin: 0;
     max-width: 60ch;
+    font-size: var(--text-lg);
+  }
+  .problem__body p:first-child {
+    color: var(--text-muted);
+  }
+  .problem__body p:nth-child(2) {
+    color: var(--text);
   }
   .section__title {
     font-size: var(--text-section);
@@ -165,11 +177,5 @@ const problemLead = problemWords.join(" ");
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
-  }
-  @media (min-width: 48rem) {
-    .problem {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: var(--space-16);
-    }
   }
 </style>

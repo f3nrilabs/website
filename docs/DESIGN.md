@@ -112,5 +112,6 @@ Only Claude Code changes `tokens.css`, and every change is recorded in this file
 
 ### Change log
 
+- **2026-11-21:** every h2 now defaults to `--text-section` in `global.css`; a section heading without its own size was rendering at the browser default.
 - **T-002 (2026-11-21):** added `--page-accent` (the active colorway accent, set by `Base`, `Hero` and `ColorBlock`) and `--header-height`.
 - **T-001 (2026-11-21):** display face changed from Unbounded to Anton (ADR 0002); added colorway accents, overlay, display size, radius and wide-container tokens for the approved theme.

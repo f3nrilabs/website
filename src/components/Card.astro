@@ -1,0 +1,59 @@
+---
+/**
+ * Quiet card (docs/DESIGN.md, "Card"): mono label in the accent color, Inter title, muted body.
+ * onMedia: translucent dark version for use on top of a gradient.
+ */
+interface Props {
+  label: string;
+  title: string;
+  onMedia?: boolean;
+  as?: "article" | "li" | "div";
+}
+const { label, title, onMedia = false, as: Tag = "article" } = Astro.props;
+---
+
+<Tag class:list={["card", { "card--media": onMedia }]}>
+  <span class="card__label">{label}</span>
+  <h3 class="card__title">{title}</h3>
+  <div class="card__body">
+    <slot />
+  </div>
+</Tag>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-8);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--duration-base) var(--ease-out);
+  }
+  .card:hover {
+    border-color: var(--page-accent);
+  }
+  .card--media {
+    background: var(--scrim-strong);
+    border-color: transparent;
+  }
+  .card--media:hover {
+    border-color: transparent;
+  }
+  .card__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--page-accent);
+  }
+  .card__title {
+    font-size: var(--text-xl);
+  }
+  .card__body {
+    color: var(--text-muted);
+    line-height: var(--leading-body);
+  }
+  .card__body :global(p) {
+    margin: 0;
+  }
+</style>

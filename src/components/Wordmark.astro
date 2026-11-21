@@ -2,18 +2,17 @@
 /**
  * The f3nri wordmark as live text: "f3nri" + accent underscore.
  * Never replace with an image of text, never change the font or letter spacing.
+ * tone="ghost" is the large decorative footer version (Obsidian text, Amethyst underscore).
  */
 interface Props {
-  size?: "sm" | "md" | "hero";
+  size?: "sm" | "md" | "hero" | "giant";
+  tone?: "default" | "ghost";
 }
-const { size = "md" } = Astro.props;
+const { size = "md", tone = "default" } = Astro.props;
 ---
 
-<span class:list={["wordmark", `wordmark--${size}`]} aria-label="f3nri">
-  <span aria-hidden="true">
-    f3nri<span class="wordmark__cursor">_</span>
-  </span>
-</span>
+<!-- prettier-ignore -->
+<span class:list={["wordmark", `wordmark--${size}`, `wordmark--${tone}`]} aria-label="f3nri"><span aria-hidden="true">f3nri<span class="wordmark__cursor">_</span></span></span>
 
 <style>
   .wordmark {
@@ -27,6 +26,12 @@ const { size = "md" } = Astro.props;
   .wordmark__cursor {
     color: var(--accent);
   }
+  .wordmark--ghost {
+    color: var(--surface);
+  }
+  .wordmark--ghost .wordmark__cursor {
+    color: var(--accent-strong);
+  }
   .wordmark--sm {
     font-size: var(--text-xl);
   }
@@ -35,5 +40,10 @@ const { size = "md" } = Astro.props;
   }
   .wordmark--hero {
     font-size: var(--text-hero);
+  }
+  .wordmark--giant {
+    font-size: var(--text-giant);
+    line-height: var(--leading-display);
+    letter-spacing: -0.04em;
   }
 </style>

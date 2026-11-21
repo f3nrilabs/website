@@ -1,0 +1,79 @@
+---
+/**
+ * Rounded gradient block for product teasers and calls to action (docs/DESIGN.md, "ColorBlock").
+ * Sets --page-accent to its colorway's accent, so pills and card labels inside follow it.
+ */
+import { accentStyle, colorways, gradientSrcset, type Colorway } from "../lib/colorways";
+
+interface Props {
+  colorway: Colorway;
+  align?: "start" | "center";
+  id?: string;
+  /** Accessible name for the section when it has no visible heading. */
+  label?: string;
+}
+const { colorway, align = "start", id, label } = Astro.props;
+const { image } = colorways[colorway];
+---
+
+<div class="block-wrap">
+  <section
+    class:list={["block", "grain", `block--${align}`]}
+    style={accentStyle(colorway)}
+    id={id}
+    aria-label={label}
+  >
+    <img
+      class="block__bg"
+      src={image.large}
+      srcset={gradientSrcset(colorway)}
+      sizes="(min-width: 87rem) 87rem, 100vw"
+      alt=""
+      width="1920"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="block__content">
+      <slot />
+    </div>
+  </section>
+</div>
+
+<style>
+  .block-wrap {
+    padding: 0 var(--gutter);
+  }
+  .block {
+    max-width: var(--content-wide);
+    margin: 0 auto;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    padding: clamp(var(--space-12), 7vw, var(--space-24))
+      clamp(var(--space-6), 4vw, var(--space-16));
+  }
+  .block__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .block__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    color: var(--text-on-media);
+  }
+  .block--center .block__content {
+    align-items: center;
+    text-align: center;
+  }
+  .block__content :global(h2) {
+    color: var(--text-on-media);
+    text-shadow: var(--glow-text);
+  }
+</style>

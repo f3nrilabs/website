@@ -1,16 +1,25 @@
 ---
 import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { accentStyle, type Colorway } from "../lib/colorways";
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  /** Colorway of the page; product pages use the product's. */
+  colorway?: Colorway;
+  /** Highlights the matching link in the header. */
+  current?: "products" | "research" | "about";
 }
 
 const {
   title,
   description = "f3nri is an independent security research team. research · tools · intel",
   image = "/og-image.png",
+  colorway = "brand",
+  current,
 } = Astro.props;
 
 const pageTitle = title ? `${title} · f3nri` : "f3nri — research · tools · intel";
@@ -41,12 +50,31 @@ const ogImage = new URL(image, Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@f3nrilabs" />
   </head>
-  <body>
-    <a class="sr-only" href="#main">
+  <body style={accentStyle(colorway)}>
+    <a class="skip-link" href="#main">
       Skip to content
     </a>
+    <SiteHeader current={current} />
     <main id="main">
       <slot />
     </main>
+    <SiteFooter />
   </body>
 </html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: var(--space-4);
+    top: -10rem;
+    z-index: 20;
+    padding: var(--space-3) var(--space-4);
+    background: var(--text);
+    color: var(--bg);
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+  }
+  .skip-link:focus {
+    top: var(--space-4);
+  }
+</style>

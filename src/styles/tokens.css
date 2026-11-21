@@ -24,9 +24,23 @@
   --accent-strong: var(--color-amethyst);
   --danger: var(--color-signal);
   --focus-ring: var(--color-neon);
+  --text-on-media: #fff4fc; /* text placed on a gradient */
+
+  /* colorways: one accent per gradient (docs/DESIGN.md, "Colorways") */
+  --cw-brand-accent: var(--color-neon);
+  --cw-horus-accent: #ffb86b;
+
+  /* overlays on top of gradients */
+  --glass: rgb(11 7 16 / 0.72);
+  --glass-border: rgb(237 230 242 / 0.12);
+  --scrim: rgb(11 7 16 / 0.6);
+  --scrim-strong: rgb(11 7 16 / 0.78);
+  --ghost-bg: rgb(255 244 252 / 0.14);
+  --ghost-border: rgb(255 244 252 / 0.5);
+  --glow-text: 0 0 40px rgb(255 228 250 / 0.35);
 
   /* type */
-  --font-display: "Unbounded", system-ui, sans-serif;
+  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
@@ -38,7 +52,11 @@
   --text-2xl: 1.75rem;
   --text-3xl: clamp(2rem, 4vw, 2.75rem);
   --text-hero: clamp(3rem, 10vw, 6.5rem);
+  --text-section: clamp(3rem, 7vw, 6rem);
+  --text-display: clamp(4rem, 10vw, 9.75rem);
+  --text-giant: clamp(5.5rem, 15vw, 15rem);
 
+  --leading-display: 0.9;
   --leading-tight: 1.1;
   --leading-body: 1.6;
   --tracking-wordmark: -0.03em;
@@ -56,9 +74,13 @@
 
   /* layout */
   --content-max: 72rem;
+  --content-wide: 87rem;
   --gutter: clamp(1rem, 4vw, 2.5rem);
   --radius-sm: 6px;
   --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
 
   /* motion */
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);

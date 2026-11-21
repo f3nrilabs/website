@@ -1,43 +1,236 @@
 ---
-/*
- * Temporary home page: shows the shared header and footer from T-002.
- * Replaced by T-003 (.agents/tasks/T-003-home.md).
- */
 import Base from "../layouts/Base.astro";
-import Wordmark from "../components/Wordmark.astro";
+import Button from "../components/Button.astro";
+import Card from "../components/Card.astro";
+import ColorBlock from "../components/ColorBlock.astro";
+import Hero from "../components/Hero.astro";
+import Pill from "../components/Pill.astro";
 ---
 
 <Base>
-  <section class="placeholder">
-    <img src="/brand/mark-neon.svg" alt="" width="160" height="160" />
-    <h1>
-      <Wordmark size="hero" />
-    </h1>
-    <p class="tagline">research · tools · intel</p>
+  <Hero
+    colorway="brand"
+    titleSize="display"
+    label="research · tools · intel"
+    title={"Break the chain\nbefore it breaks you."}
+  >
+    <Fragment slot="lead">
+      <p>
+        f3nri is an independent security research team. We study threats, build the tools to catch
+        them, and publish what we find.
+      </p>
+    </Fragment>
+    <Fragment slot="actions">
+      <Button variant="dark" href="/products/horus">
+        Explore Horus
+      </Button>
+      <Button variant="ghost" href="mailto:hello@f3nri.com">
+        Contact us
+      </Button>
+    </Fragment>
+  </Hero>
+
+  <section class="disciplines" aria-labelledby="disciplines-title">
+    <div class="disciplines__head">
+      <h2 id="disciplines-title">
+        Three disciplines.
+        <br />
+        <span class="disciplines__accent">One team.</span>
+      </h2>
+      <p class="disciplines__lead">
+        Everything we publish comes from the same loop: find it, prove it, ship something that
+        catches it next time.
+      </p>
+    </div>
+
+    <div class="disciplines__grid">
+      <Card label="01 / research" title="Research">
+        Threat analysis and write-ups on phishing, impersonation and the infrastructure behind them,
+        with the evidence attached.
+      </Card>
+      <Card label="02 / tools" title="Tools">
+        Software that turns what we learn into detection: monitoring, scanning and automation for
+        security teams.
+      </Card>
+      <Card label="03 / intel" title="Intel">
+        Indicators, patterns and context that defenders can act on, written plainly and published
+        openly.
+      </Card>
+    </div>
   </section>
+
+  <ColorBlock colorway="horus">
+    <div class="horus__head">
+      <Pill label="product 01 · in development · early access" />
+      <h2 class="horus__title">Horus</h2>
+      <p class="horus__lead">
+        Catches typosquat, homoglyph and combosquat domains of your brand the moment their
+        certificate is issued, before they go live.
+      </p>
+    </div>
+
+    <div class="horus__grid">
+      <Card
+        onMedia
+        label="watch"
+        title="Catches typosquat, homoglyph and combosquat domains of a brand."
+      />
+      <Card
+        onMedia
+        label="score"
+        title="Reads Certificate Transparency logs from Google, Cloudflare, Sectigo, DigiCert and Let's Encrypt, and scores every new domain against the registered brands."
+      />
+      <Card onMedia label="alert" title="Alerts by Telegram, email or webhook." />
+    </div>
+
+    <div class="horus__actions">
+      <Button variant="dark" href="/products/horus">
+        See Horus
+      </Button>
+      <Button variant="ghost" href="mailto:hello@f3nri.com?subject=Horus%20early%20access">
+        Request early access
+      </Button>
+    </div>
+  </ColorBlock>
+
+  <section class="lab" aria-labelledby="lab-title">
+    <div class="lab__head">
+      <h2 id="lab-title">From the lab</h2>
+      <a class="lab__link" href="/research">
+        All research →
+      </a>
+    </div>
+
+    <!-- T-004 will replace this empty state with the latest three research posts. -->
+    <div class="lab__empty">
+      <p class="lab__command">
+        <code>$ ls research/</code>
+      </p>
+      <p class="lab__line">The first write-ups are on the way.</p>
+      <p class="lab__muted">Follow along on GitHub or X to read them first.</p>
+    </div>
+  </section>
+
+  <ColorBlock colorway="dark" align="center">
+    <h2 class="cta__title">Talk to us.</h2>
+    <p class="cta__lead">
+      Early access to Horus, research collaboration, or something you found. We read every message.
+    </p>
+    <Button variant="primary" href="mailto:hello@f3nri.com">
+      hello@f3nri.com
+    </Button>
+  </ColorBlock>
 </Base>
 
 <style>
-  .placeholder {
-    min-height: 70vh;
+  .disciplines,
+  .lab {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: var(--space-24) var(--gutter);
+  }
+  .disciplines__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: end;
+    gap: var(--space-8);
+  }
+  .disciplines__accent {
+    color: var(--accent);
+  }
+  .disciplines__lead {
+    margin: 0;
+    max-width: 34rem;
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+  .disciplines__grid,
+  .horus__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+    gap: var(--space-6);
+  }
+  .disciplines__grid {
+    margin-top: var(--space-12);
+  }
+  .horus__head {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
     gap: var(--space-6);
-    padding: var(--space-16) var(--gutter);
-    text-align: center;
   }
-  .placeholder img {
-    width: clamp(6rem, 18vw, 10rem);
-    height: auto;
+  .horus__title {
+    font-size: var(--text-giant);
   }
-  .placeholder h1 {
-    text-transform: none;
-  }
-  .tagline {
+  .horus__lead {
     margin: 0;
-    font-family: var(--font-mono);
+    max-width: 44rem;
+    color: var(--text-on-media);
+    font-size: var(--text-lg);
+  }
+  .horus__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .lab__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .lab__head h2 {
+    font-size: var(--text-section);
+  }
+  .lab__link {
+    font-size: var(--text-lg);
+  }
+  .lab__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-top: var(--space-12);
+    padding: var(--space-12);
+    background: var(--surface);
+    border: thin dashed var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .lab__command,
+  .lab__line,
+  .lab__muted {
+    margin: 0;
+  }
+  .lab__command {
     color: var(--accent);
+    font-size: var(--text-sm);
+  }
+  .lab__line {
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+  .lab__muted {
+    color: var(--text-muted);
+  }
+  .cta__title {
+    font-size: var(--text-display);
+  }
+  .cta__lead {
+    margin: 0;
+    max-width: 42rem;
+    color: var(--text-on-media);
+    font-size: var(--text-lg);
+  }
+
+  @media (max-width: 48rem) {
+    .disciplines,
+    .lab {
+      padding-block: var(--space-16);
+    }
+    .disciplines__head {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6);
+    }
   }
 </style>

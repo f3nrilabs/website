@@ -1,0 +1,65 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Button from "../../components/Button.astro";
+import ColorBlock from "../../components/ColorBlock.astro";
+import Pill from "../../components/Pill.astro";
+
+const products = (await getCollection("products")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name),
+);
+---
+
+<Base title="Products" current="products">
+  <div class="page">
+    <header class="intro">
+      <h1 class="intro__title">Products.</h1>
+    </header>
+
+    <div class="products">
+      {products.map((product) => (
+        <ColorBlock colorway={product.data.colorway}>
+          <Pill label={product.data.statusLabel} />
+          <h2 class="product__name">{product.data.name}</h2>
+          <p class="product__tagline">{product.data.tagline}</p>
+          <div class="product__actions">
+            <Button href={`/products/${product.data.slug}`} variant="dark">
+              See {product.data.name}
+            </Button>
+          </div>
+        </ColorBlock>
+      ))}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding-top: var(--space-24);
+  }
+  .intro {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 var(--gutter) var(--space-16);
+  }
+  .intro__title {
+    font-size: var(--text-section);
+  }
+  .products {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .product__name {
+    font-size: var(--text-section);
+  }
+  .product__tagline {
+    margin: 0;
+    max-width: 60ch;
+  }
+  .product__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>

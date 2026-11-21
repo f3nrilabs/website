@@ -19,7 +19,8 @@ A static site built with Astro. `npm run build` renders every page to plain HTML
 │   ├── ARCHITECTURE.md    this file
 │   └── decisions/         architecture decision records (ADRs)
 ├── public/                served as-is (favicon, OG image, brand mark, robots, security.txt)
-│   └── brand/             copied from f3nrilabs/brand, never edited here
+│   ├── brand/             copied from f3nrilabs/brand, never edited here
+│   └── images/gradients/  colorway gradient images (docs/DESIGN.md, "Colorways")
 ├── src/
 │   ├── styles/tokens.css  all design tokens
 │   ├── styles/global.css  fonts, reset, base element styles

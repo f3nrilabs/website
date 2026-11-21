@@ -1,0 +1,39 @@
+---
+/**
+ * Mono label in a translucent pill with an accent dot (docs/DESIGN.md, "Pill").
+ * The dot uses the surrounding --page-accent unless `accent` names another token.
+ */
+interface Props {
+  label: string;
+  /** Name of a CSS custom property, e.g. "--cw-horus-accent". */
+  accent?: string;
+}
+const { label, accent = "--page-accent" } = Astro.props;
+---
+
+<span class="pill">
+  <span class="pill__dot" style={`background: var(${accent})`} aria-hidden="true"></span>
+  {label}
+</span>
+
+<style>
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    align-self: flex-start;
+    padding: var(--space-2) var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    line-height: 1;
+    color: var(--text-on-media);
+    background: var(--scrim);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+  }
+  .pill__dot {
+    width: var(--space-2);
+    height: var(--space-2);
+    border-radius: var(--radius-pill);
+  }
+</style>

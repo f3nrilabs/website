@@ -70,17 +70,17 @@ import Pill from "../components/Pill.astro";
     </div>
 
     <div class="horus__grid">
-      <Card
-        onMedia
-        label="watch"
-        title="Catches typosquat, homoglyph and combosquat domains of a brand."
-      />
-      <Card
-        onMedia
-        label="score"
-        title="Reads Certificate Transparency logs from Google, Cloudflare, Sectigo, DigiCert and Let's Encrypt, and scores every new domain against the registered brands."
-      />
-      <Card onMedia label="alert" title="Alerts by Telegram, email or webhook." />
+      <Card onMedia label="watch" title="Certificate Transparency logs">
+        Google, Cloudflare, Sectigo, DigiCert and Let's Encrypt logs, read as new certificates are
+        written.
+      </Card>
+      <Card onMedia label="score" title="Lookalike scoring">
+        Every new domain is scored against your brands for typosquats, homoglyphs and combosquats.
+      </Card>
+      <Card onMedia label="alert" title="Tracked until it bites">
+        From certificate to DNS to live site to content match, with alerts by Telegram, email or
+        webhook.
+      </Card>
     </div>
 
     <div class="horus__actions">

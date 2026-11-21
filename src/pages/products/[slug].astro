@@ -1,0 +1,181 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Button from "../../components/Button.astro";
+import Card from "../../components/Card.astro";
+import ColorBlock from "../../components/ColorBlock.astro";
+import Hero from "../../components/Hero.astro";
+import { colorways } from "../../lib/colorways";
+
+export async function getStaticPaths() {
+  const products = await getCollection("products");
+  return products.map((product) => ({
+    params: { slug: product.data.slug },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: CollectionEntry<"products">;
+}
+const { product } = Astro.props;
+const { name, colorway, statusLabel, tagline, problem, steps, features, accessSubject } =
+  product.data;
+// The Markdown body holds the copy for the access block.
+const { Content } = await render(product);
+const accessHref = `mailto:hello@f3nri.com?subject=${encodeURIComponent(accessSubject)}`;
+// The last word of the problem title is the accent phrase.
+const problemWords = problem.title.trim().split(" ");
+const problemAccent = problemWords.pop() ?? "";
+const problemLead = problemWords.join(" ");
+---
+
+<Base
+  title={name}
+  description={tagline}
+  image={colorways[colorway].image.large}
+  colorway={colorway}
+  current="products"
+>
+  <Hero colorway={colorway} label={statusLabel} title={name} titleSize="giant">
+    <Fragment slot="lead">
+      <p>{tagline}</p>
+    </Fragment>
+    <Fragment slot="actions">
+      <Button href={accessHref} variant="dark">
+        Request early access
+      </Button>
+      <Button href="#how" variant="ghost">
+        How it works
+      </Button>
+    </Fragment>
+  </Hero>
+
+  <div class="product">
+    <section class="problem" aria-labelledby="problem-title">
+      <h2 id="problem-title" class="problem__title">
+        {problemLead} <span>{problemAccent}</span>
+      </h2>
+      <div class="problem__body">
+        {problem.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </section>
+
+    <section id="how" aria-labelledby="how-title">
+      <h2 id="how-title" class="section__title">
+        How it works
+      </h2>
+      <ol class="step-list">
+        {steps.map((step) => (
+          <Card as="li" label={step.code} title={step.title}>
+            {step.text}
+          </Card>
+        ))}
+      </ol>
+    </section>
+
+    <section aria-label="Features">
+      <ul class="feature-list">
+        {features.map((feature) => (
+          <Card as="li" label={feature.label} title={feature.title}>
+            {feature.text}
+          </Card>
+        ))}
+      </ul>
+    </section>
+  </div>
+
+  <div class="access">
+    <ColorBlock colorway={colorway} align="center">
+      <h2>Get early access.</h2>
+      <div class="access__copy">
+        <Content />
+      </div>
+      <div class="access__actions">
+        <Button href={accessHref} variant="dark">
+          Request early access
+        </Button>
+      </div>
+    </ColorBlock>
+  </div>
+</Base>
+
+<style>
+  .product {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+    padding: var(--space-24) var(--gutter) 0;
+  }
+  .product > section {
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+  }
+  .problem {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: var(--space-12);
+    align-items: start;
+  }
+  /* The 20rem track needs a single column at the smallest width. */
+  @media (max-width: 22rem) {
+    .problem {
+      grid-template-columns: 1fr;
+    }
+  }
+  .problem__title {
+    font-size: var(--text-section);
+  }
+  .problem__title span {
+    color: var(--page-accent);
+  }
+  .problem__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .problem__body p {
+    margin: 0;
+    max-width: 60ch;
+    font-size: var(--text-lg);
+  }
+  .problem__body p:first-child {
+    color: var(--text-muted);
+  }
+  .problem__body p:nth-child(2) {
+    color: var(--text);
+  }
+  .section__title {
+    font-size: var(--text-section);
+    margin-bottom: var(--space-8);
+  }
+  .step-list,
+  .feature-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+  #how {
+    scroll-margin-top: calc(var(--header-height) + var(--space-4));
+  }
+  .access {
+    margin-top: var(--space-24);
+  }
+  .access__copy {
+    max-width: 60ch;
+  }
+  .access__copy :global(p) {
+    margin: 0;
+  }
+  .access__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>

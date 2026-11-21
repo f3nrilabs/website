@@ -1,0 +1,115 @@
+---
+/**
+ * Site footer (docs/DESIGN.md, "SiteFooter"): link columns, giant ghost wordmark, © line.
+ */
+import Wordmark from "./Wordmark.astro";
+
+const columns: { title: string; links: { label: string; href: string }[] }[] = [
+  { title: "products", links: [{ label: "Horus", href: "/products/horus" }] },
+  {
+    title: "company",
+    links: [
+      { label: "Research", href: "/research" },
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    title: "follow",
+    links: [
+      { label: "GitHub", href: "https://github.com/f3nrilabs" },
+      { label: "X", href: "https://x.com/f3nrilabs" },
+      { label: "Instagram", href: "https://instagram.com/f3nrilabs" },
+    ],
+  },
+  {
+    title: "security",
+    links: [
+      { label: "security.txt", href: "/.well-known/security.txt" },
+      { label: "hello@f3nri.com", href: "mailto:hello@f3nri.com" },
+    ],
+  },
+];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="inner">
+    <nav class="columns" aria-label="Footer">
+      {columns.map((c) => (
+        <div class="column">
+          <p class="column__title">{c.title}</p>
+          <ul>
+            {c.links.map((l) => (
+              <li>
+                <a href={l.href}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </nav>
+    <div class="giant" aria-hidden="true">
+      <Wordmark size="giant" tone="ghost" />
+    </div>
+    <div class="legal">
+      <span>© {year} f3nri</span>
+      <span class="tagline">research · tools · intel</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-24);
+    padding: var(--space-16) var(--gutter) var(--space-8);
+    border-top: 1px solid var(--border);
+  }
+  .inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: var(--space-8);
+  }
+  .column__title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--page-accent);
+  }
+  .giant {
+    overflow: hidden;
+  }
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  .tagline {
+    font-family: var(--font-mono);
+  }
+</style>

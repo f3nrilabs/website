@@ -1,0 +1,114 @@
+---
+/**
+ * Full-bleed gradient hero (docs/DESIGN.md, "Hero"). Holds the page's only h1.
+ * `title` may contain "\n" for a deliberate line break.
+ * Slots: "lead" (one paragraph), "actions" (buttons).
+ */
+import Pill from "./Pill.astro";
+import { accentStyle, colorways, gradientSrcset, type Colorway } from "../lib/colorways";
+
+interface Props {
+  colorway: Colorway;
+  label: string;
+  title: string;
+  titleSize?: "display" | "giant";
+}
+const { colorway, label, title, titleSize = "display" } = Astro.props;
+const { image } = colorways[colorway];
+---
+
+<section class="hero grain" style={accentStyle(colorway)}>
+  <img
+    class="hero__bg"
+    src={image.large}
+    srcset={gradientSrcset(colorway)}
+    sizes="100vw"
+    alt=""
+    width="1920"
+    height="1080"
+    fetchpriority="high"
+    decoding="async"
+  />
+  <div class="hero__content">
+    <Pill label={label} />
+    <h1 class:list={["hero__title", `hero__title--${titleSize}`]}>{title}</h1>
+    <div class="hero__row">
+      <div class="hero__lead">
+        <slot name="lead" />
+      </div>
+      <div class="hero__actions">
+        <slot name="actions" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(36rem, 100svh, 53.75rem);
+    margin-top: calc(-1 * var(--header-height));
+    padding: calc(var(--header-height) + var(--space-16)) var(--gutter) var(--space-16);
+    overflow: hidden;
+  }
+  /* darker floor so the lead text always reads */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(to top, var(--scrim), transparent 55%);
+  }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .hero__title {
+    color: var(--text-on-media);
+    text-shadow: var(--glow-text);
+    white-space: pre-line;
+  }
+  .hero__title--display {
+    font-size: var(--text-display);
+  }
+  .hero__title--giant {
+    font-size: var(--text-giant);
+    line-height: 0.82;
+  }
+  .hero__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-8);
+  }
+  .hero__lead {
+    max-width: 34rem;
+    font-size: var(--text-lg);
+    line-height: 1.55;
+    color: var(--text-on-media);
+  }
+  .hero__lead :global(p) {
+    margin: 0;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>

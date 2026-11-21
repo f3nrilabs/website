@@ -51,6 +51,9 @@ const contact = "mailto:hello@f3nri.com";
               </a>
             </li>
           ))}
+          <li class="menu__contact">
+            <a href={contact}>Contact us</a>
+          </li>
         </ul>
       </details>
     </div>
@@ -152,6 +155,20 @@ const contact = "mailto:hello@f3nri.com";
     }
     .menu {
       display: block;
+    }
+  }
+
+  /* Phones narrower than ~368px: the contact pill moves into the menu so the mark,
+     wordmark and menu fit on one line. The menu's contact link only shows here. */
+  .menu__contact {
+    display: none;
+  }
+  @media (max-width: 23rem) {
+    .actions > :global(.btn) {
+      display: none;
+    }
+    .menu__contact {
+      display: list-item;
     }
   }
 </style>

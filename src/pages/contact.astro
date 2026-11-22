@@ -24,7 +24,11 @@ import Button from "../components/Button.astro";
           <a href="mailto:hello@f3nri.com">hello@f3nri.com</a>. The same address is listed in our{" "}
           <a href="/.well-known/security.txt">security.txt</a>.
         </p>
-        <p class="placeholder">[TODO: Arda — PGP key yes or no]</p>
+        <p>
+          Sensitive reports can be sent encrypted. Key fingerprint for hello@f3nri.com:
+          <span class="fingerprint">4941 B770 C40C E520 F81C 8184 2780 DDAB D676 7400</span>(
+          <a href="/.well-known/pgp.txt">PGP key</a>)
+        </p>
       </div>
     </section>
   </article>
@@ -76,10 +80,10 @@ import Button from "../components/Button.astro";
     max-width: 60ch;
     font-size: var(--text-lg);
   }
-  .placeholder {
+  .fingerprint {
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    color: var(--text-muted);
+    overflow-wrap: anywhere;
   }
 
   @media (max-width: 48rem) {

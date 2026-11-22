@@ -9,4 +9,6 @@ export default defineConfig({
   trailingSlash: "never",
   build: { format: "file" },
   integrations: [sitemap()],
+  // Code blocks take their colors from the --astro-code-* tokens in src/styles/tokens.css.
+  markdown: { shikiConfig: { theme: "css-variables" } },
 });

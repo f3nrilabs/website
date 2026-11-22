@@ -41,22 +41,23 @@
   --ghost-border: rgb(255 244 252 / 0.5);
   --glow-text: 0 0 40px rgb(255 228 250 / 0.35);
 
-  /* spectrum light that glides after the pointer on the header (docs/DESIGN.md, "SiteHeader").
-     Drawn for rightward motion: blue/violet trail on the left, pink/orange front on the right. */
-  --spectrum-width: 18rem;
-  --spectrum-height: 7rem;
-  --spectrum-blur: 1.25rem;
-  --spectrum-opacity: 0.7;
+  /* spectrum light that glides after the pointer on the header (docs/DESIGN.md, "SiteHeader"):
+     a band as tall as the bar, warm core with violet and blue toward its edges. */
+  --spectrum-width: 11rem;
+  --spectrum-blur: 0.75rem;
+  --spectrum-opacity: 0.55;
   --spectrum-glow: linear-gradient(
     90deg,
     transparent 0%,
-    color-mix(in srgb, var(--color-electric) 55%, transparent) 22%,
-    color-mix(in srgb, var(--color-amethyst) 70%, transparent) 45%,
-    color-mix(in srgb, var(--color-neon) 70%, transparent) 70%,
-    color-mix(in srgb, var(--cw-horus-accent) 80%, transparent) 88%,
+    color-mix(in srgb, var(--color-electric) 35%, transparent) 15%,
+    color-mix(in srgb, var(--color-amethyst) 50%, transparent) 30%,
+    color-mix(in srgb, var(--color-neon) 60%, transparent) 42%,
+    color-mix(in srgb, var(--cw-horus-accent) 70%, transparent) 50%,
+    color-mix(in srgb, var(--color-neon) 60%, transparent) 58%,
+    color-mix(in srgb, var(--color-amethyst) 50%, transparent) 70%,
+    color-mix(in srgb, var(--color-electric) 35%, transparent) 85%,
     transparent 100%
   );
-  --spectrum-mask: radial-gradient(closest-side, #000 35%, transparent);
   --spectrum-fade: 400ms;
 
   /* code blocks in Markdown (Shiki "css-variables" theme, astro.config.mjs) */

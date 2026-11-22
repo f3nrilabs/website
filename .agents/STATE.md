@@ -14,7 +14,7 @@ Status: `todo` · `in-progress` · `review` · `blocked` · `done`
 | T-005 | Products: `/products` index and the Horus page                                  | OpenCode                     | opencode/T-005-products           | done        | T-002      |
 | T-006 | About and Contact pages                                                         | OpenCode (builder sub-agent) | opencode/T-006-about-contact      | done        | T-002      |
 | T-008 | Spectrum light on the header                                                    | Claude Code                  | claude/T-008-header-spectrum      | done        | T-002      |
-| T-007 | Browser tests: Playwright smoke and axe accessibility checks in CI              | Claude Code                  |                                   | todo        | T-003      |
+| T-007 | Browser tests: Playwright smoke and axe accessibility checks in CI              | OpenCode (builder sub-agent) | opencode/T-007-e2e                | review      | T-003      |
 | T-009 | Smaller, balanced spectrum light                                                | Claude Code                  | claude/T-009-spectrum-tune        | done        | T-008      |
 | T-010 | A living spectrum light (spring, breath, shimmer, bloom)                        | OpenCode (architect)         | opencode/T-010-alive-spectrum     | done        | T-009      |
 | T-011 | A real early-access flow on the Horus page                                      | OpenCode (builder sub-agent) | opencode/T-011-horus-early-access | done        | T-005      |

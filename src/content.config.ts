@@ -31,6 +31,14 @@ const products = defineCollection({
       }),
     ),
     accessSubject: z.string(),
+    earlyAccess: z
+      .object({
+        includes: z.array(z.string()),
+        audience: z.string(),
+        opens: z.string(),
+        whatToSend: z.string(),
+      })
+      .optional(),
   }),
 });
 

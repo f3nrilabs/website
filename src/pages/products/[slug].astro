@@ -19,8 +19,17 @@ interface Props {
   product: CollectionEntry<"products">;
 }
 const { product } = Astro.props;
-const { name, colorway, statusLabel, tagline, problem, steps, features, accessSubject } =
-  product.data;
+const {
+  name,
+  colorway,
+  statusLabel,
+  tagline,
+  problem,
+  steps,
+  features,
+  accessSubject,
+  earlyAccess,
+} = product.data;
 // The Markdown body holds the copy for the access block.
 const { Content } = await render(product);
 const accessHref = `mailto:hello@f3nri.com?subject=${encodeURIComponent(accessSubject)}`;
@@ -85,6 +94,32 @@ const problemLead = problemWords.join(" ");
         ))}
       </ul>
     </section>
+
+    {earlyAccess && (
+      <section aria-labelledby="early-title">
+        <h2 id="early-title" class="section__title">
+          Early access.
+        </h2>
+        <div class="early__grid">
+          <div class="early__group">
+            <span class="early__label">includes</span>
+            <ul class="early__list">
+              {earlyAccess.includes.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="early__group">
+            <span class="early__label">who it's for</span>
+            <p class="early__copy">{earlyAccess.audience}</p>
+          </div>
+          <div class="early__group">
+            <span class="early__label">how it opens</span>
+            <p class="early__copy">{earlyAccess.opens}</p>
+          </div>
+        </div>
+      </section>
+    )}
   </div>
 
   <div class="access">
@@ -97,6 +132,7 @@ const problemLead = problemWords.join(" ");
         <Button href={accessHref} variant="dark">
           Request early access
         </Button>
+        {earlyAccess && <p class="access__send">{earlyAccess.whatToSend}</p>}
       </div>
     </ColorBlock>
   </div>
@@ -164,6 +200,39 @@ const problemLead = problemWords.join(" ");
   #how {
     scroll-margin-top: calc(var(--header-height) + var(--space-4));
   }
+  .early__grid {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+  .early__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-8);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .early__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--page-accent);
+  }
+  .early__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin: 0;
+    padding-left: var(--space-4);
+    color: var(--text-muted);
+    line-height: var(--leading-body);
+  }
+  .early__copy {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: var(--leading-body);
+  }
   .access {
     margin-top: var(--space-24);
   }
@@ -175,7 +244,14 @@ const problemLead = problemWords.join(" ");
   }
   .access__actions {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    max-width: 60ch;
+  }
+  .access__send {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--text-on-media);
   }
 </style>

@@ -1,0 +1,91 @@
+---
+import Base from "../layouts/Base.astro";
+import Button from "../components/Button.astro";
+---
+
+<Base title="Contact">
+  <article class="page">
+    <header class="page__head">
+      <h1 class="page__title">Contact</h1>
+      <p class="page__lead">There is no form. Email is the way to reach f3nri.</p>
+      <div class="contact">
+        <p class="contact__address">
+          <a href="mailto:hello@f3nri.com">hello@f3nri.com</a>
+        </p>
+        <Button href="mailto:hello@f3nri.com">Email us</Button>
+      </div>
+    </header>
+
+    <section aria-labelledby="disclosure-title">
+      <h2 id="disclosure-title">Responsible disclosure.</h2>
+      <div class="prose">
+        <p>
+          If you find a vulnerability in an f3nri site or product, report it to{" "}
+          <a href="mailto:hello@f3nri.com">hello@f3nri.com</a>. The same address is listed in our{" "}
+          <a href="/.well-known/security.txt">security.txt</a>.
+        </p>
+        <p class="placeholder">[TODO: Arda — PGP key yes or no]</p>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: var(--space-24) var(--gutter) 0;
+  }
+  .page__title {
+    font-size: var(--text-section);
+  }
+  .page__head,
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .page__lead {
+    margin: 0;
+    max-width: 60ch;
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-6);
+  }
+  .contact__address {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    line-height: var(--leading-tight);
+  }
+  .prose {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .prose p {
+    margin: 0;
+    max-width: 60ch;
+    font-size: var(--text-lg);
+  }
+  .placeholder {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 48rem) {
+    .page {
+      gap: var(--space-16);
+      padding-top: var(--space-16);
+    }
+  }
+</style>

@@ -2,7 +2,7 @@
 /**
  * Sticky pill navigation (docs/DESIGN.md, "SiteHeader").
  * Under 48rem the section links move into a <details> menu (no JavaScript needed).
- * On devices with a mouse, a spectrum glow follows the pointer across the bar: the only
+ * On devices with a mouse, a spectrum light glides after the pointer across the bar: the only
  * script on the site, a progressive enhancement that does nothing on touch screens or
  * with reduced motion.
  */
@@ -25,7 +25,9 @@ const contact = "mailto:hello@f3nri.com";
 
 <header class="site-header">
   <nav class="bar" aria-label="Main" data-spectrum>
-    <span class="spectrum" aria-hidden="true"></span>
+    <span class="spectrum" aria-hidden="true">
+      <span class="spectrum__glow"></span>
+    </span>
     <a class="home" href="/" aria-label="f3nri home">
       <img src="/brand/mark-neon.svg" alt="" width="28" height="28" />
       <Wordmark size="sm" />
@@ -65,47 +67,57 @@ const contact = "mailto:hello@f3nri.com";
 </header>
 
 <script>
-  // Spectrum wave: a colour ripple that spreads out from the pointer when it lands on a
-  // link or button in the bar, or clicks. Mouse only; skipped with reduced motion.
+  // Spectrum light: a soft colour glow that glides after the pointer across the bar, stretching
+  // a little with speed and turning to face the direction of travel. Mouse only; skipped with
+  // reduced motion. The loop runs only while the pointer is on the bar.
   const bar = document.querySelector<HTMLElement>("[data-spectrum]");
-  const layer = bar?.querySelector<HTMLElement>(".spectrum");
+  const glow = bar?.querySelector<HTMLElement>(".spectrum__glow");
   const canHover = window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)");
 
-  if (bar && layer && canHover.matches) {
-    let last = 0;
-    let target: Element | null = null;
+  if (bar && glow && canHover.matches) {
+    let x = 0,
+      y = 0,
+      tx = 0,
+      ty = 0,
+      vx = 0,
+      dir = 1;
+    let frame = 0;
 
-    const ripple = (event: PointerEvent) => {
-      const now = performance.now();
-      if (now - last < 280 || layer.childElementCount > 2) return;
-      last = now;
-      const box = bar.getBoundingClientRect();
-      const wave = document.createElement("span");
-      wave.className = "spectrum__wave";
-      wave.style.left = `${event.clientX - box.left}px`;
-      wave.style.top = `${event.clientY - box.top}px`;
-      layer.append(wave);
-      wave
-        .animate(
-          [
-            { transform: "translate(-50%, -50%) scale(0.05)", opacity: 1 },
-            { transform: "translate(-50%, -50%) scale(0.75)", opacity: 1, offset: 0.65 },
-            { transform: "translate(-50%, -50%) scale(1)", opacity: 0 },
-          ],
-          { duration: 1100, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)" },
-        )
-        .finished.then(() => wave.remove());
+    const tick = () => {
+      const dx = tx - x;
+      x += dx * 0.12;
+      y += (ty - y) * 0.12;
+      vx += (dx - vx) * 0.2;
+      if (Math.abs(vx) > 2) dir = Math.sign(vx);
+      const stretch = 1 + Math.min(Math.abs(vx) / 120, 0.6);
+      glow.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${dir * stretch}, ${1 / Math.sqrt(stretch)})`;
+      frame =
+        Math.abs(dx) > 0.3 || Math.abs(vx) > 0.3 || bar.matches(":hover")
+          ? requestAnimationFrame(tick)
+          : 0;
     };
 
+    const aim = (event: PointerEvent) => {
+      const box = bar.getBoundingClientRect();
+      tx = event.clientX - box.left;
+      ty = event.clientY - box.top;
+    };
+
+    bar.addEventListener("pointerenter", (event) => {
+      if (event.pointerType !== "mouse") return;
+      aim(event);
+      x = tx;
+      y = ty;
+      vx = 0;
+      bar.classList.add("is-lit");
+      if (!frame) frame = requestAnimationFrame(tick);
+    });
     bar.addEventListener("pointermove", (event) => {
-      const hit = (event.target as Element).closest("a, button, summary");
-      if (hit && hit !== target) ripple(event);
-      target = hit;
+      if (event.pointerType !== "mouse") return;
+      aim(event);
+      if (!frame) frame = requestAnimationFrame(tick);
     });
-    bar.addEventListener("pointerleave", () => {
-      target = null;
-    });
-    bar.addEventListener("pointerdown", ripple);
+    bar.addEventListener("pointerleave", () => bar.classList.remove("is-lit"));
   }
 </script>
 
@@ -141,15 +153,22 @@ const contact = "mailto:hello@f3nri.com";
     overflow: hidden;
     pointer-events: none;
   }
-  .spectrum :global(.spectrum__wave) {
+  .spectrum__glow {
     position: absolute;
-    width: var(--spectrum-wave-size);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--spectrum-wave);
-    filter: blur(2px) saturate(1.15);
-    transform: translate(-50%, -50%) scale(0.05);
-    will-change: transform, opacity;
+    left: 0;
+    top: 0;
+    width: var(--spectrum-width);
+    height: var(--spectrum-height);
+    background: var(--spectrum-glow);
+    mask-image: var(--spectrum-mask);
+    filter: blur(var(--spectrum-blur));
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity var(--spectrum-fade) ease;
+    will-change: transform;
+  }
+  .bar.is-lit .spectrum__glow {
+    opacity: var(--spectrum-opacity);
   }
   .bar > :not(.spectrum) {
     position: relative;

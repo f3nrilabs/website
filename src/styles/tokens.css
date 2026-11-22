@@ -41,18 +41,23 @@
   --ghost-border: rgb(255 244 252 / 0.5);
   --glow-text: 0 0 40px rgb(255 228 250 / 0.35);
 
-  /* spectrum wave that ripples out from the pointer on the header (docs/DESIGN.md, "SiteHeader") */
-  --spectrum-wave-size: 34rem;
-  --spectrum-wave: radial-gradient(
-    circle closest-side,
-    color-mix(in srgb, var(--text-on-media) 6%, transparent) 0%,
-    color-mix(in srgb, var(--color-neon) 22%, transparent) 30%,
-    color-mix(in srgb, var(--color-electric) 55%, transparent) 55%,
-    color-mix(in srgb, var(--color-amethyst) 85%, transparent) 72%,
-    color-mix(in srgb, var(--color-neon) 95%, transparent) 85%,
-    var(--cw-horus-accent) 94%,
+  /* spectrum light that glides after the pointer on the header (docs/DESIGN.md, "SiteHeader").
+     Drawn for rightward motion: blue/violet trail on the left, pink/orange front on the right. */
+  --spectrum-width: 18rem;
+  --spectrum-height: 7rem;
+  --spectrum-blur: 1.25rem;
+  --spectrum-opacity: 0.7;
+  --spectrum-glow: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-electric) 55%, transparent) 22%,
+    color-mix(in srgb, var(--color-amethyst) 70%, transparent) 45%,
+    color-mix(in srgb, var(--color-neon) 70%, transparent) 70%,
+    color-mix(in srgb, var(--cw-horus-accent) 80%, transparent) 88%,
     transparent 100%
   );
+  --spectrum-mask: radial-gradient(closest-side, #000 35%, transparent);
+  --spectrum-fade: 400ms;
 
   /* type */
   --font-display: "Anton", Impact, "Arial Narrow", sans-serif;

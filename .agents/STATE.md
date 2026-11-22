@@ -4,23 +4,23 @@ The single board for who is doing what. Update it on your branch when you claim,
 
 Status: `todo` · `in-progress` · `review` · `blocked` · `done`
 
-| ID    | Task                                                                            | Owner                        | Branch                            | Status      | Depends on |
-| ----- | ------------------------------------------------------------------------------- | ---------------------------- | --------------------------------- | ----------- | ---------- |
-| T-000 | Project scaffold, rules, CI and deploy                                          | Claude Code                  | main                              | done        |            |
-| T-001 | Theme rules in `docs/DESIGN.md`, tokens, fonts, gradient images                 | Claude Code                  | claude/T-001-theme                | done        |            |
-| T-002 | Layout components: SiteHeader, SiteFooter, Hero, Pill, Button, Card, ColorBlock | Claude Code                  | claude/T-002-components           | done        | T-001      |
-| T-003 | Home page                                                                       | OpenCode                     | opencode/T-003-home               | done        | T-002      |
-| T-004 | Research: content collection, list page, post page                              | OpenCode (builder sub-agent) | opencode/T-004-research           | done        | T-002      |
-| T-005 | Products: `/products` index and the Horus page                                  | OpenCode                     | opencode/T-005-products           | done        | T-002      |
-| T-006 | About and Contact pages                                                         | OpenCode (builder sub-agent) | opencode/T-006-about-contact      | done        | T-002      |
-| T-008 | Spectrum light on the header                                                    | Claude Code                  | claude/T-008-header-spectrum      | done        | T-002      |
-| T-007 | Browser tests: Playwright smoke and axe accessibility checks in CI              | OpenCode (builder sub-agent) | opencode/T-007-e2e                | review      | T-003      |
-| T-009 | Smaller, balanced spectrum light                                                | Claude Code                  | claude/T-009-spectrum-tune        | done        | T-008      |
-| T-010 | A living spectrum light (spring, breath, shimmer, bloom)                        | OpenCode (architect)         | opencode/T-010-alive-spectrum     | done        | T-009      |
-| T-011 | A real early-access flow on the Horus page                                      | OpenCode (builder sub-agent) | opencode/T-011-horus-early-access | done        | T-005      |
-| T-012 | PGP key for the contact page (hotfix: no personal names on the site)            | OpenCode (architect)         | opencode/T-012-pgp-key            | done        | T-006      |
-| T-013 | No personal names in the repository                                             | OpenCode (architect)         | opencode/T-013-no-personal-names  | done        | none       |
-| T-014 | Clean canonical URLs (no .html)                                                 | OpenCode (architect)         | opencode/T-014-clean-urls         | in-progress | none       |
+| ID    | Task                                                                            | Owner                        | Branch                            | Status | Depends on |
+| ----- | ------------------------------------------------------------------------------- | ---------------------------- | --------------------------------- | ------ | ---------- |
+| T-000 | Project scaffold, rules, CI and deploy                                          | Claude Code                  | main                              | done   |            |
+| T-001 | Theme rules in `docs/DESIGN.md`, tokens, fonts, gradient images                 | Claude Code                  | claude/T-001-theme                | done   |            |
+| T-002 | Layout components: SiteHeader, SiteFooter, Hero, Pill, Button, Card, ColorBlock | Claude Code                  | claude/T-002-components           | done   | T-001      |
+| T-003 | Home page                                                                       | OpenCode                     | opencode/T-003-home               | done   | T-002      |
+| T-004 | Research: content collection, list page, post page                              | OpenCode (builder sub-agent) | opencode/T-004-research           | done   | T-002      |
+| T-005 | Products: `/products` index and the Horus page                                  | OpenCode                     | opencode/T-005-products           | done   | T-002      |
+| T-006 | About and Contact pages                                                         | OpenCode (builder sub-agent) | opencode/T-006-about-contact      | done   | T-002      |
+| T-008 | Spectrum light on the header                                                    | Claude Code                  | claude/T-008-header-spectrum      | done   | T-002      |
+| T-007 | Browser tests: Playwright smoke and axe accessibility checks in CI              | OpenCode (builder sub-agent) | opencode/T-007-e2e                | done   | T-003      |
+| T-009 | Smaller, balanced spectrum light                                                | Claude Code                  | claude/T-009-spectrum-tune        | done   | T-008      |
+| T-010 | A living spectrum light (spring, breath, shimmer, bloom)                        | OpenCode (architect)         | opencode/T-010-alive-spectrum     | done   | T-009      |
+| T-011 | A real early-access flow on the Horus page                                      | OpenCode (builder sub-agent) | opencode/T-011-horus-early-access | done   | T-005      |
+| T-012 | PGP key for the contact page (hotfix: no personal names on the site)            | OpenCode (architect)         | opencode/T-012-pgp-key            | done   | T-006      |
+| T-013 | No personal names in the repository                                             | OpenCode (architect)         | opencode/T-013-no-personal-names  | done   | none       |
+| T-014 | Clean canonical URLs (no .html)                                                 | OpenCode (architect)         | opencode/T-014-clean-urls         | done   | none       |
 
 ## Notes
 

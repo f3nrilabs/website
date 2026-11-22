@@ -44,7 +44,7 @@
   /* spectrum glow that follows the pointer on the header (docs/DESIGN.md, "SiteHeader") */
   --spectrum-size: 11rem;
   --spectrum: radial-gradient(
-    ellipse var(--spectrum-size) 180% at var(--mx, 50%) 50%,
+    ellipse var(--spectrum-size) 180% at var(--mx, 50%) var(--my, 50%),
     color-mix(in srgb, var(--text-on-media) 22%, transparent) 0%,
     color-mix(in srgb, var(--color-neon) 30%, transparent) 22%,
     color-mix(in srgb, var(--color-electric) 75%, transparent) 42%,

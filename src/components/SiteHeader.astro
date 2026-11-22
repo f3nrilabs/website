@@ -70,6 +70,7 @@ const contact = "mailto:hello@f3nri.com";
     bar.addEventListener("pointermove", (event) => {
       const box = bar.getBoundingClientRect();
       bar.style.setProperty("--mx", `${event.clientX - box.left}px`);
+      bar.style.setProperty("--my", `${event.clientY - box.top}px`);
       bar.dataset.lit = "";
     });
     bar.addEventListener("pointerleave", () => {

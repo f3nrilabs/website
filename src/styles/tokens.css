@@ -41,17 +41,22 @@
   --ghost-border: rgb(255 244 252 / 0.5);
   --glow-text: 0 0 40px rgb(255 228 250 / 0.35);
 
-  /* spectrum glow that follows the pointer on the header (docs/DESIGN.md, "SiteHeader") */
-  --spectrum-size: 11rem;
-  --spectrum: radial-gradient(
-    ellipse var(--spectrum-size) 180% at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--text-on-media) 22%, transparent) 0%,
-    color-mix(in srgb, var(--color-neon) 30%, transparent) 22%,
-    color-mix(in srgb, var(--color-electric) 75%, transparent) 42%,
-    color-mix(in srgb, var(--color-amethyst) 85%, transparent) 56%,
-    color-mix(in srgb, var(--color-neon) 85%, transparent) 70%,
-    color-mix(in srgb, var(--cw-horus-accent) 90%, transparent) 82%,
-    transparent 92%
+  /* spectrum rings that follow the pointer on the header (docs/DESIGN.md, "SiteHeader") */
+  --spectrum-size: 4.75rem;
+  --spectrum: conic-gradient(
+    var(--color-electric),
+    var(--color-amethyst),
+    var(--color-neon),
+    var(--cw-horus-accent),
+    var(--color-signal),
+    var(--color-electric)
+  );
+  --spectrum-mask: radial-gradient(
+    closest-side,
+    transparent 38%,
+    #000 52%,
+    #000 78%,
+    transparent 100%
   );
 
   /* type */

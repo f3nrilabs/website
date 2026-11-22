@@ -25,6 +25,10 @@ const contact = "mailto:hello@f3nri.com";
 
 <header class="site-header">
   <nav class="bar" aria-label="Main" data-spectrum>
+    <span class="spectrum" aria-hidden="true">
+      <span class="spectrum__ring"></span>
+      <span class="spectrum__ring spectrum__ring--b"></span>
+    </span>
     <a class="home" href="/" aria-label="f3nri home">
       <img src="/brand/mark-neon.svg" alt="" width="28" height="28" />
       <Wordmark size="sm" />
@@ -103,36 +107,62 @@ const contact = "mailto:hello@f3nri.com";
     -webkit-backdrop-filter: blur(16px);
     position: relative;
   }
-  /* spectrum glow: soft light inside the bar plus a brighter ring on its border */
-  .bar::before,
-  .bar::after {
-    content: "";
+  /* spectrum: rippling colour rings around the pointer (docs/DESIGN.md, "SiteHeader") */
+  .spectrum {
     position: absolute;
-    inset: -1px;
+    inset: 0;
     border-radius: inherit;
-    background: var(--spectrum);
-    opacity: 0;
+    overflow: hidden;
     pointer-events: none;
+    opacity: 0;
     transition: opacity var(--duration-base) var(--ease-out);
   }
-  .bar::before {
-    filter: blur(10px);
-  }
-  .bar::after {
-    padding: 1px;
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
-  .bar[data-lit]::before {
-    opacity: 0.85;
-  }
-  .bar[data-lit]::after {
+  .bar[data-lit] .spectrum {
     opacity: 1;
   }
-  .bar > * {
+  .spectrum__ring {
+    position: absolute;
+    left: var(--mx, 50%);
+    top: var(--my, 50%);
+    width: var(--spectrum-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--spectrum);
+    -webkit-mask: var(--spectrum-mask);
+    mask: var(--spectrum-mask);
+    filter: blur(3px) saturate(1.2);
+    transform: translate(-50%, -50%);
+    transition:
+      left 90ms var(--ease-out),
+      top 90ms var(--ease-out);
+    animation:
+      spectrum-spin 2.4s linear infinite,
+      spectrum-breathe 1.6s ease-in-out infinite alternate;
+  }
+  .spectrum__ring--b {
+    width: calc(var(--spectrum-size) * 1.45);
+    animation-direction: reverse, alternate-reverse;
+    animation-duration: 1.7s, 1.2s;
+    opacity: 0.55;
+    filter: blur(8px) saturate(1.2);
+    transition:
+      left 220ms var(--ease-out),
+      top 220ms var(--ease-out);
+  }
+  @keyframes spectrum-spin {
+    to {
+      rotate: 1turn;
+    }
+  }
+  @keyframes spectrum-breathe {
+    from {
+      scale: 0.88;
+    }
+    to {
+      scale: 1.08;
+    }
+  }
+  .bar > :not(.spectrum) {
     position: relative;
     z-index: 1;
   }

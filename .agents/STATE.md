@@ -12,7 +12,7 @@ Status: `todo` · `in-progress` · `review` · `blocked` · `done`
 | T-003 | Home page                                                                       | OpenCode                             | opencode/T-003-home           | done        | T-002      |
 | T-004 | Research: content collection, list page, post page                              | Claude Code (spec), OpenCode (build) |                               | todo        | T-002      |
 | T-005 | Products: `/products` index and the Horus page                                  | OpenCode                             | opencode/T-005-products       | done        | T-002      |
-| T-006 | About and Contact pages                                                         | OpenCode (builder sub-agent)         | opencode/T-006-about-contact  | in-progress | T-002      |
+| T-006 | About and Contact pages                                                         | OpenCode (builder sub-agent)         | opencode/T-006-about-contact  | done        | T-002      |
 | T-008 | Spectrum light on the header                                                    | Claude Code                          | claude/T-008-header-spectrum  | done        | T-002      |
 | T-007 | Browser tests: Playwright smoke and axe accessibility checks in CI              | Claude Code                          |                               | todo        | T-003      |
 | T-009 | Smaller, balanced spectrum light                                                | Claude Code                          | claude/T-009-spectrum-tune    | done        | T-008      |

@@ -52,5 +52,6 @@ f3nri can publish a write-up by adding one Markdown file. Visitors find it on `/
 
 ## Notes and follow-ups
 
+- Follow-up: canonical URLs in the build include `.html` (for example `https://f3nri.com/research.html`), because `Base` uses `Astro.url.pathname` with `build.format: "file"`. Pre-existing on every page; normalise it in a separate task.
 - Follow-up: RSS feed with an ADR for `@astrojs/rss`.
 - Follow-up: per-post OG images.

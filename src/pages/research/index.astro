@@ -1,0 +1,96 @@
+---
+import Base from "../../layouts/Base.astro";
+import Card from "../../components/Card.astro";
+import { formatDate, getPublishedResearch } from "../../lib/research";
+
+const posts = await getPublishedResearch();
+---
+
+<Base
+  current="research"
+  title="Research"
+  description="Threat intelligence write-ups, analyses and advisories from f3nri."
+>
+  <div class="page">
+    <header class="head">
+      <h1 class="head__title">Research</h1>
+      <p class="head__lead">Threat intelligence write-ups, analyses and advisories.</p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="empty">No write-ups published yet.</p>
+    ) : (
+      <ol class="posts">
+        {posts.map((post) => (
+          <Card
+            as="li"
+            label={`${post.data.kind} · ${formatDate(post.data.date)}`}
+            title={post.data.title}
+          >
+            {/* Card has no href prop; the stretched link makes the whole card open the post. */}
+            <a class="post__link" href={`/research/${post.id}`} aria-label={post.data.title}></a>
+            <p class="post__summary">{post.data.summary}</p>
+            {post.data.tags.length > 0 && <p class="post__tags">{post.data.tags.join(" · ")}</p>}
+          </Card>
+        ))}
+      </ol>
+    )}
+  </div>
+</Base>
+
+<style>
+  .page {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: var(--space-24) var(--gutter);
+  }
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .head__title {
+    font-size: var(--text-section);
+  }
+  .head__lead {
+    margin: 0;
+    max-width: var(--measure);
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+  .posts {
+    list-style: none;
+    margin: var(--space-12) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  }
+  .posts :global(.card) {
+    position: relative;
+  }
+  .post__link {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+  }
+  .post__summary,
+  .post__tags {
+    margin: 0;
+  }
+  .post__tags {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+  .empty {
+    margin: var(--space-12) 0 0;
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+
+  @media (max-width: 48rem) {
+    .page {
+      padding-block: var(--space-16);
+    }
+  }
+</style>

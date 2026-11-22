@@ -5,6 +5,9 @@ import Card from "../components/Card.astro";
 import ColorBlock from "../components/ColorBlock.astro";
 import Hero from "../components/Hero.astro";
 import Pill from "../components/Pill.astro";
+import { formatDate, getPublishedResearch } from "../lib/research";
+
+const labPosts = (await getPublishedResearch()).slice(0, 3);
 ---
 
 <Base>
@@ -95,20 +98,32 @@ import Pill from "../components/Pill.astro";
 
   <section class="lab" aria-labelledby="lab-title">
     <div class="lab__head">
-      <h2 id="lab-title">From the lab</h2>
-      <a class="lab__link" href="/research">
-        All research →
-      </a>
+      <h2 id="lab-title">From the lab.</h2>
+      <Button href="/research">All research</Button>
     </div>
 
-    <!-- T-004 will replace this empty state with the latest three research posts. -->
-    <div class="lab__empty">
-      <p class="lab__command">
-        <code>$ ls research/</code>
-      </p>
-      <p class="lab__line">The first write-ups are on the way.</p>
-      <p class="lab__muted">Follow along on GitHub or X to read them first.</p>
-    </div>
+    {labPosts.length === 0 ? (
+      <p class="lab__empty">No write-ups published yet.</p>
+    ) : (
+      <ol class="lab__posts">
+        {labPosts.map((post) => (
+          <Card
+            as="li"
+            label={`${post.data.kind} · ${formatDate(post.data.date)}`}
+            title={post.data.title}
+          >
+            {/* Card has no href prop; the stretched link makes the whole card open the post. */}
+            <a
+              class="lab__post-link"
+              href={`/research/${post.id}`}
+              aria-label={post.data.title}
+            ></a>
+            <p class="lab__summary">{post.data.summary}</p>
+            {post.data.tags.length > 0 && <p class="lab__tags">{post.data.tags.join(" · ")}</p>}
+          </Card>
+        ))}
+      </ol>
+    )}
   </section>
 
   <ColorBlock colorway="dark" align="center">
@@ -183,35 +198,34 @@ import Pill from "../components/Pill.astro";
   .lab__head h2 {
     font-size: var(--text-section);
   }
-  .lab__link {
+  .lab__empty {
+    margin: var(--space-12) 0 0;
+    color: var(--text-muted);
     font-size: var(--text-lg);
   }
-  .lab__empty {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
-    margin-top: var(--space-12);
-    padding: var(--space-12);
-    background: var(--surface);
-    border: thin dashed var(--border);
+  .lab__posts {
+    list-style: none;
+    margin: var(--space-12) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
+  }
+  .lab__posts :global(.card) {
+    position: relative;
+  }
+  .lab__post-link {
+    position: absolute;
+    inset: 0;
     border-radius: var(--radius-lg);
   }
-  .lab__command,
-  .lab__line,
-  .lab__muted {
+  .lab__summary,
+  .lab__tags {
     margin: 0;
   }
-  .lab__command {
-    color: var(--accent);
+  .lab__tags {
+    font-family: var(--font-mono);
     font-size: var(--text-sm);
-  }
-  .lab__line {
-    font-size: var(--text-lg);
-    font-weight: 600;
-  }
-  .lab__muted {
-    color: var(--text-muted);
   }
   .cta__title {
     font-size: var(--text-display);

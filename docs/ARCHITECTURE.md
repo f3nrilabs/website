@@ -30,7 +30,7 @@ A static site built with Astro. `npm run build` renders every page to plain HTML
 └── .github/workflows/     ci.yml (checks on every PR), deploy.yml (ship main to the VPS)
 ```
 
-Content collections live under `src/content/` with their schemas in `src/content.config.ts`: `products/` (T-005) and planned `research/` (T-004).
+Content collections live under `src/content/` with their schemas in `src/content.config.ts`: `products/` (T-005) and `research/` (T-004).
 
 ## Styling
 

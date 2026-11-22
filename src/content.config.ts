@@ -34,4 +34,17 @@ const products = defineCollection({
   }),
 });
 
-export const collections = { products };
+const research = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/research" }),
+  schema: z.object({
+    title: z.string(),
+    summary: z.string().max(200),
+    date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    kind: z.enum(["threat-intel", "analysis", "advisory"]),
+    tags: z.array(z.string().toLowerCase()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { products, research };

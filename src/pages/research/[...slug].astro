@@ -1,0 +1,91 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Prose from "../../components/Prose.astro";
+import { colorways } from "../../lib/colorways";
+import { formatDate, getPublishedResearch } from "../../lib/research";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedResearch();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"research">;
+}
+
+const { post } = Astro.props;
+const { title, summary, date, updated, kind, tags } = post.data;
+const { Content } = await render(post);
+const isoDate = (value: Date) => value.toISOString().slice(0, 10);
+---
+
+<Base title={title} description={summary} image={colorways.brand.image.large} current="research">
+  <article class="post">
+    <header class="post__head">
+      <h1 class="post__title">{title}</h1>
+      <p class="post__meta">
+        {kind} · <time datetime={isoDate(date)}>{formatDate(date)}</time>
+        {updated && (
+          <span>
+            {" · "}updated <time datetime={isoDate(updated)}>{formatDate(updated)}</time>
+          </span>
+        )}
+      </p>
+      {tags.length > 0 && <p class="post__tags">{tags.join(" · ")}</p>}
+      <p class="post__lead">{summary}</p>
+    </header>
+
+    <Prose>
+      <Content />
+    </Prose>
+
+    <p class="post__back">
+      <a href="/research">Back to research</a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .post {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: var(--space-24) var(--gutter);
+  }
+  .post__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .post__title {
+    font-size: var(--text-section);
+  }
+  .post__meta,
+  .post__tags {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  .post__lead {
+    margin: 0;
+    max-width: var(--measure);
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+  .post__back {
+    margin: 0;
+  }
+
+  @media (max-width: 48rem) {
+    .post {
+      padding-block: var(--space-16);
+    }
+  }
+</style>

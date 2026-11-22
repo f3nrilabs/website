@@ -36,7 +36,7 @@ Merging to `main` deploys to production within about a minute. `main` must alway
 | Who                                        | Does                                                                                                   | Does not                                                     |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
 | **Arda** (owner)                           | Decides scope and priorities, writes or approves task files, approves design, merges PRs               |                                                              |
-| **Architect** (Claude Code, see below)     | Architecture, design system, layout and complex components, specs for others, reviews every builder PR | Merge to `main`                                              |
+| **Architect** (Claude Code, see below)     | Architecture, design system, layout and complex components, specs for others, reviews every builder PR | Merge to `main` without Arda's approval for that PR          |
 | **OpenCode** (builder: agent or sub-agent) | Pages, components and content from an approved task file, refactors, tests                             | Change architecture, tokens or dependencies; merge to `main` |
 | **Other agents** (Codex, Command Code, …)  | Single-file tasks explicitly assigned to them                                                          | Anything else                                                |
 
@@ -55,7 +55,7 @@ Every PR is reviewed by an agent other than its author before Arda merges it.
 4. **Build.** Small steps, run `npm run ci` often. Stay inside the task's scope; if you find something else that needs fixing, write it down under "Follow-ups" in the task file instead of fixing it now.
 5. **PR.** Push the branch and open a PR to `main` using the template. Fill every section. Attach screenshots at 375 px, 768 px and 1280 px for any visual change.
 6. **Review.** The reviewing agent checks the PR against the task's acceptance criteria and this file, and leaves concrete comments. The author fixes them in new commits (no force-push after review starts).
-7. **Merge.** Arda merges with "Squash and merge". The author sets the task to `done` in `.agents/STATE.md`.
+7. **Merge.** Arda merges with "Squash and merge", or tells the architect agent to do the same for a PR he has explicitly approved in chat. The agent merging first checks that the branch is up to date with `main`, has no conflicts and a green CI run. The author sets the task to `done` in `.agents/STATE.md`.
 
 Keep PRs small: under ~400 changed lines excluding the lockfile and images. Split larger work into several tasks.
 

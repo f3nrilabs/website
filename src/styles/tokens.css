@@ -42,7 +42,9 @@
   --glow-text: 0 0 40px rgb(255 228 250 / 0.35);
 
   /* spectrum light that glides after the pointer on the header (docs/DESIGN.md, "SiteHeader"):
-     a band as tall as the bar, warm core with violet and blue toward its edges. */
+     a band as tall as the bar, warm core with violet and blue toward its edges.
+     Life at rest and on arrival (T-010): a slow breath in size, a slow colour shimmer,
+     a small one-shot bloom when the pointer enters. */
   --spectrum-width: 11rem;
   --spectrum-blur: 0.75rem;
   --spectrum-opacity: 0.55;
@@ -59,6 +61,11 @@
     transparent 100%
   );
   --spectrum-fade: 400ms;
+  --spectrum-breath: 0.04;
+  --spectrum-breath-period: 3200ms;
+  --spectrum-shimmer: 12deg;
+  --spectrum-shimmer-period: 3600ms;
+  --spectrum-bloom: 0.3;
 
   /* code blocks in Markdown (Shiki "css-variables" theme, astro.config.mjs) */
   --astro-code-foreground: var(--color-bone);

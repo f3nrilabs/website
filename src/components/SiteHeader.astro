@@ -67,25 +67,51 @@ const contact = "mailto:hello@f3nri.com";
 </header>
 
 <script>
-  // Spectrum light: a soft band of colour, as tall as the bar, that glides after the pointer and
-  // stretches slightly with speed; the pill's rounded ends clip it into shape. Mouse only; skipped with
-  // reduced motion. The loop runs only while the pointer is on the bar.
+  // Spectrum light: a soft band of colour, as tall as the bar, that follows the pointer and
+  // stretches slightly with speed; the pill's rounded ends clip it into shape. It moves on a
+  // slightly under-damped spring (a hint of overshoot, a natural settle), breathes at rest and
+  // lands with a small bloom. Mouse only; skipped with reduced motion. The loop runs only
+  // while the pointer is on the bar.
   const bar = document.querySelector<HTMLElement>("[data-spectrum]");
   const glow = bar?.querySelector<HTMLElement>(".spectrum__glow");
   const canHover = window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)");
 
   if (bar && glow && canHover.matches) {
+    // Motion tokens (docs/DESIGN.md, "Motion"), read once. The fallbacks only fire if a
+    // token is missing, which CI would catch as a visible glitch.
+    const css = getComputedStyle(glow);
+    const breath = Number.parseFloat(css.getPropertyValue("--spectrum-breath")) || 0.04;
+    const breathPeriod =
+      Number.parseFloat(css.getPropertyValue("--spectrum-breath-period")) || 3200;
+    const bloom = Number.parseFloat(css.getPropertyValue("--spectrum-bloom")) || 0.3;
+
+    // Spring: stiffness 170, damping 21 — just under critical, so the light settles
+    // naturally instead of sliding linearly like a slider.
+    const stiffness = 170;
+    const damping = 21;
     let x = 0,
       tx = 0,
       vx = 0;
+    let entered = 0;
+    let last = performance.now();
     let frame = 0;
 
-    const tick = () => {
+    const tick = (now: number) => {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+
       const dx = tx - x;
-      x += dx * 0.16;
-      vx += (dx - vx) * 0.2;
+      vx += (dx * stiffness - vx * damping) * dt;
+      x += vx * dt;
+
+      // Idle breath so the light never sits frozen; arrival bloom so it lands.
+      const age = (now - entered) / 1000;
+      const swell =
+        1 +
+        Math.sin((now / breathPeriod) * 2 * Math.PI) * breath -
+        bloom * Math.exp(-7 * age) * Math.cos(10 * age);
       const stretch = 1 + Math.min(Math.abs(vx) / 200, 0.25);
-      glow.style.transform = `translateX(${x}px) translateX(-50%) scaleX(${stretch})`;
+      glow.style.transform = `translateX(${x}px) translateX(-50%) scaleX(${stretch * swell}) scaleY(${1 / Math.sqrt(swell)})`;
       frame =
         Math.abs(dx) > 0.3 || Math.abs(vx) > 0.3 || bar.matches(":hover")
           ? requestAnimationFrame(tick)
@@ -102,6 +128,7 @@ const contact = "mailto:hello@f3nri.com";
       aim(event);
       x = tx;
       vx = 0;
+      entered = performance.now();
       bar.classList.add("is-lit");
       if (!frame) frame = requestAnimationFrame(tick);
     });
@@ -163,6 +190,21 @@ const contact = "mailto:hello@f3nri.com";
   }
   .bar.is-lit .spectrum__glow {
     opacity: var(--spectrum-opacity);
+    /* colours drift slowly inside the band, so the light is alive even at rest */
+    animation: spectrum-shimmer var(--spectrum-shimmer-period) ease-in-out infinite alternate;
+  }
+  @keyframes spectrum-shimmer {
+    from {
+      filter: blur(var(--spectrum-blur)) hue-rotate(calc(var(--spectrum-shimmer) * -1));
+    }
+    to {
+      filter: blur(var(--spectrum-blur)) hue-rotate(var(--spectrum-shimmer));
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bar.is-lit .spectrum__glow {
+      animation: none;
+    }
   }
   .bar > :not(.spectrum) {
     position: relative;

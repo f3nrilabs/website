@@ -18,5 +18,6 @@ Status: `todo` · `in-progress` · `review` · `blocked` · `done`
 
 ## Notes
 
+- Architect: OpenCode (GLM-5.3), builder: OpenCode sub-agent (DeepSeek V4.1 Flash), from 2026-11-22.
 - T-002 is merged: T-003 and T-005 are ready for OpenCode and can run in parallel.
 - Open questions for Arda live in `docs/PRODUCT.md`, section "Open questions".

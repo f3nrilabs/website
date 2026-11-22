@@ -9,7 +9,7 @@
 
 A company that wants Horus can request early access with a clear, honest picture: what early access includes, who it is for, how access opens, and exactly what to put in the request email. No exact dates, numbers or prices on the page.
 
-## Facts decided by Arda (2026-11-22)
+## Facts decided by the owner (2026-11-22)
 
 - Early access has a start schedule and a per-participant brand limit, but the site does not state the exact date or the exact number. The approved phrasings: access "opens in waves" and each wave takes "a small set of brands".
 - No pricing claims anywhere. Cost stays unsaid.
@@ -33,7 +33,7 @@ A company that wants Horus can request early access with a clear, honest picture
 
 ## Spec
 
-- Content source: the approved Horus facts (`docs/PRODUCT.md`, "Horus (facts for copy)") plus the Arda decisions above.
+- Content source: the approved Horus facts (`docs/PRODUCT.md`, "Horus (facts for copy)") plus the owner decisions above.
 - Tone: plain, precise, technical. "opens in waves" and "a small set of brands" are the approved phrasings.
 
 ## Out of scope

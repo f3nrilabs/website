@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Rules for every AI agent and human working on **f3nri.com**. This file wins over any habit, default or other instruction file. If something here is unclear or blocks you, stop and ask Arda; do not guess around it.
+Rules for every AI agent and human working on **f3nri.com**. This file wins over any habit, default or other instruction file. If something here is unclear or blocks you, stop and ask the owner; do not guess around it.
 
 ## 0. Before you touch anything
 
@@ -35,14 +35,14 @@ Merging to `main` deploys to production within about a minute. `main` must alway
 
 | Who                                        | Does                                                                                                   | Does not                                                     |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
-| **Arda** (owner)                           | Decides scope and priorities, writes or approves task files, approves design, merges PRs               |                                                              |
-| **Architect** (Claude Code, see below)     | Architecture, design system, layout and complex components, specs for others, reviews every builder PR | Merge to `main` without Arda's approval for that PR          |
+| **Owner**                                  | Decides scope and priorities, writes or approves task files, approves design, merges PRs               |                                                              |
+| **Architect** (Claude Code, see below)     | Architecture, design system, layout and complex components, specs for others, reviews every builder PR | Merge to `main` without the owner's approval for that PR     |
 | **OpenCode** (builder: agent or sub-agent) | Pages, components and content from an approved task file, refactors, tests                             | Change architecture, tokens or dependencies; merge to `main` |
 | **Other agents** (Codex, Command Code, …)  | Single-file tasks explicitly assigned to them                                                          | Anything else                                                |
 
-The architect role is held by Claude Code, or by the agent Arda assigns to it (recorded in `.agents/STATE.md`, Notes). A PR written by the builder sub-agent counts as reviewed when the architect agent reviews it.
+The architect role is held by Claude Code, or by the agent the owner assigns to it (recorded in `.agents/STATE.md`, Notes). A PR written by the builder sub-agent counts as reviewed when the architect agent reviews it.
 
-Every PR is reviewed by an agent other than its author before Arda merges it.
+Every PR is reviewed by an agent other than its author before the owner merges it.
 
 ## 3. Workflow: no task file, no code
 
@@ -55,7 +55,7 @@ Every PR is reviewed by an agent other than its author before Arda merges it.
 4. **Build.** Small steps, run `npm run ci` often. Stay inside the task's scope; if you find something else that needs fixing, write it down under "Follow-ups" in the task file instead of fixing it now.
 5. **PR.** Push the branch and open a PR to `main` using the template. Fill every section. Attach screenshots at 375 px, 768 px and 1280 px for any visual change.
 6. **Review.** The reviewing agent checks the PR against the task's acceptance criteria and this file, and leaves concrete comments. The author fixes them in new commits (no force-push after review starts).
-7. **Merge.** Arda merges with "Squash and merge", or tells the architect agent to do the same for a PR he has explicitly approved in chat. The agent merging first checks that the branch is up to date with `main`, has no conflicts and a green CI run. The author sets the task to `done` in `.agents/STATE.md`.
+7. **Merge.** The owner merges with "Squash and merge", or tells the architect agent to do the same for a PR he has explicitly approved in chat. The agent merging first checks that the branch is up to date with `main`, has no conflicts and a green CI run. The author sets the task to `done` in `.agents/STATE.md`.
 
 Keep PRs small: under ~400 changed lines excluding the lockfile and images. Split larger work into several tasks.
 
@@ -70,7 +70,7 @@ Keep PRs small: under ~400 changed lines excluding the lockfile and images. Spli
 **Code**
 
 - Zero client-side JavaScript unless the task says why it is needed. If it is needed, use an Astro island scoped to that component.
-- No new dependency without an ADR in `docs/decisions/` approved by Arda. Prefer the platform and what is already installed.
+- No new dependency without an ADR in `docs/decisions/` approved by the owner. Prefer the platform and what is already installed.
 - No third-party scripts, analytics, trackers, embeds, external fonts or CDNs. Everything is served from f3nri.com.
 - TypeScript strictest stays on. No `any`, no `@ts-ignore` without a comment explaining why.
 - Do not edit `package-lock.json` by hand, `dist/`, `.astro/`, or files in `public/brand/` (they come from `f3nrilabs/brand`).
@@ -79,7 +79,7 @@ Keep PRs small: under ~400 changed lines excluding the lockfile and images. Spli
 **Content**
 
 - English only: all text on the site, code, comments, commits and PRs.
-- No invented content: no made-up numbers, clients, testimonials, team members, findings or dates. Missing facts become a visible placeholder like `[TODO: Arda — tool description]` and are listed in the PR.
+- No invented content: no made-up numbers, clients, testimonials, team members, findings or dates. Missing facts become a visible placeholder like `[TODO: the owner — tool description]` and are listed in the PR.
 - Tone: plain, precise, technical. No hype, no emoji, no "cutting-edge", "revolutionary" or similar.
 
 **Quality**
@@ -103,7 +103,7 @@ A task is done when all of these are true:
 - [ ] Keyboard-only walkthrough of anything interactive.
 - [ ] Docs updated if behavior, structure or design rules changed.
 - [ ] `.agents/STATE.md` updated.
-- [ ] PR reviewed by another agent, then merged by Arda.
+- [ ] PR reviewed by another agent, then merged by the owner.
 
 ## 6. Commits
 
@@ -111,6 +111,6 @@ Conventional Commits, imperative, English: `feat: add research list page`, `fix:
 
 ## 7. When something goes wrong
 
-- **Blocked or unsure:** write `Blocked:` with the reason in your task file and `.agents/STATE.md`, then stop and ask Arda. Do not invent a workaround that breaks a rule above.
-- **Conflict with another agent's work:** never overwrite or delete it. Rebase on `origin/main`; if the conflict is in their area, ask them or Arda.
+- **Blocked or unsure:** write `Blocked:` with the reason in your task file and `.agents/STATE.md`, then stop and ask the owner. Do not invent a workaround that breaks a rule above.
+- **Conflict with another agent's work:** never overwrite or delete it. Rebase on `origin/main`; if the conflict is in their area, ask them or the owner.
 - **Broke production:** say so immediately. Revert the merge commit with a PR titled `revert: …`; the VPS also keeps the last five releases for an instant rollback.

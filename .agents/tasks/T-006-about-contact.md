@@ -9,11 +9,11 @@
 
 A visitor can read what f3nri is and how it works, and anyone who needs the team (companies, researchers, recruiters, vulnerability reporters) has one obvious way to make contact: an email to `hello@f3nri.com`.
 
-## Facts decided by Arda (2026-11-22)
+## Facts decided by the owner (2026-11-22)
 
 - The team name is **f3nri**. There is no separate group name and members are not individually named.
 - Contact is **mailto only**. There is no form and there will not be one.
-- PGP key on the contact page is still an open question: keep it as a `[TODO: Arda — …]`.
+- PGP key on the contact page is still an open question: keep it as a `[TODO: the owner — …]`.
 
 ## Acceptance criteria
 
@@ -23,7 +23,7 @@ A visitor can read what f3nri is and how it works, and anyone who needs the team
 - [ ] Content page pattern (`docs/DESIGN.md`, "Page patterns"): no gradient hero, h1 "About" in `--text-section`, body inside `--content-max`.
 - [ ] Lead paragraph is exactly the approved sentence from `docs/PRODUCT.md`: "f3nri is an independent security research team. We study threats, build the tools to catch them, and publish what we find."
 - [ ] Section "What we do." (h2): the three disciplines as `Card`s, using the same labels and body copy as the home page (`01 / research`, `02 / tools`, `03 / intel` in `src/pages/index.astro`). No new discipline text.
-- [ ] Section "How we work." (h2): one or two honest paragraphs. Only verifiable statements; anything not yet decided is a `[TODO: Arda — …]` (at most two) instead of invented content.
+- [ ] Section "How we work." (h2): one or two honest paragraphs. Only verifiable statements; anything not yet decided is a `[TODO: the owner — …]` (at most two) instead of invented content.
 - [ ] One short paragraph presenting the team: the work is published under the single name f3nri; members are not individually named.
 - [ ] Closing: h2 "Talk to us." (approved copy) with a primary `Button` to `mailto:hello@f3nri.com`.
 - [ ] One h1, headings in order, semantic HTML, all text ≥ WCAG AA on `--bg`.
@@ -33,7 +33,7 @@ A visitor can read what f3nri is and how it works, and anyone who needs the team
 - [ ] Uses `Base` with `title="Contact"` and no `current` (Contact is not a nav section).
 - [ ] Content page pattern: h1 "Contact" in `--text-section`, no gradient.
 - [ ] The address `hello@f3nri.com` is shown as mono text and linked: at least one `mailto:hello@f3nri.com` control (a primary `Button` labeled "Email us").
-- [ ] Section "Responsible disclosure." (h2): a short note that vulnerabilities in f3nri sites and products can be reported to the same address, plus a plain link to `/.well-known/security.txt` (same tab, no `rel` needed) and the `[TODO: Arda — PGP key yes or no]` placeholder.
+- [ ] Section "Responsible disclosure." (h2): a short note that vulnerabilities in f3nri sites and products can be reported to the same address, plus a plain link to `/.well-known/security.txt` (same tab, no `rel` needed) and the `[TODO: the owner — PGP key yes or no]` placeholder.
 - [ ] No form, no client-side JavaScript, no third-party anything.
 - [ ] One h1, headings in order, semantic HTML.
 
@@ -54,7 +54,7 @@ A visitor can read what f3nri is and how it works, and anyone who needs the team
 
 ## Out of scope
 
-- A contact form (rejected by Arda, 2026-11-22).
+- A contact form (rejected by the owner, 2026-11-22).
 - Team member names, bios or photos.
 - The PGP key itself (open question in `docs/PRODUCT.md`).
 - Social links, a press section, response-time promises, analytics.

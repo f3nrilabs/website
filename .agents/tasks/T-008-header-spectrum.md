@@ -7,7 +7,7 @@
 
 ## Goal
 
-When a visitor moves the mouse over the header bar, a soft spectrum light glides after the pointer inside the pill: pink/orange at the front, blue/violet trailing behind. Approved by Arda on 2026-11-22 from a recorded demo.
+When a visitor moves the mouse over the header bar, a soft spectrum light glides after the pointer inside the pill: pink/orange at the front, blue/violet trailing behind. Approved by the owner on 2026-11-22 from a recorded demo.
 
 ## Acceptance criteria
 
@@ -35,4 +35,4 @@ AGENTS.md section 4 allows JavaScript when the task says why. Pointer-following 
 
 ## Notes and follow-ups
 
-- Earlier prototypes (static glow, rotating rings, ripple waves) were rejected by Arda; the branch history keeps them.
+- Earlier prototypes (static glow, rotating rings, ripple waves) were rejected by the owner; the branch history keeps them.

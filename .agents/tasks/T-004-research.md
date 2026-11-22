@@ -45,7 +45,7 @@ f3nri can publish a write-up by adding one Markdown file. Visitors find it on `/
 
 ## Out of scope
 
-- Real write-ups (Arda writes them; each one is its own PR adding one Markdown file).
+- Real write-ups (the owner writes them; each one is its own PR adding one Markdown file).
 - Tag pages, search, pagination, RSS (RSS needs `@astrojs/rss`, a new dependency: follow-up with an ADR).
 - Author names (open question in `docs/PRODUCT.md`).
 - New tokens or changes to existing components (ask Claude Code).

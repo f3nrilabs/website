@@ -18,10 +18,11 @@ Status: `todo` · `in-progress` · `review` · `blocked` · `done`
 | T-009 | Smaller, balanced spectrum light                                                | Claude Code                  | claude/T-009-spectrum-tune        | done        | T-008      |
 | T-010 | A living spectrum light (spring, breath, shimmer, bloom)                        | OpenCode (architect)         | opencode/T-010-alive-spectrum     | done        | T-009      |
 | T-011 | A real early-access flow on the Horus page                                      | OpenCode (builder sub-agent) | opencode/T-011-horus-early-access | done        | T-005      |
-| T-012 | PGP key for the contact page (hotfix: no personal names on the site)            | OpenCode (architect)         | opencode/T-012-pgp-key            | in-progress | T-006      |
+| T-012 | PGP key for the contact page (hotfix: no personal names on the site)            | OpenCode (architect)         | opencode/T-012-pgp-key            | done        | T-006      |
+| T-013 | No personal names in the repository                                             | OpenCode (architect)         | opencode/T-013-no-personal-names  | in-progress | none       |
 
 ## Notes
 
 - Architect: OpenCode (GLM-5.3), builder: OpenCode sub-agent (DeepSeek V4.1 Flash), from 2026-11-22.
 - T-002 is merged: T-003 and T-005 are ready for OpenCode and can run in parallel.
-- Open questions for Arda live in `docs/PRODUCT.md`, section "Open questions".
+- Open questions for the owner live in `docs/PRODUCT.md`, section "Open questions".

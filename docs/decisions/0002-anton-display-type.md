@@ -1,6 +1,6 @@
 # 0002: Anton for display headlines, Unbounded removed
 
-- **Status:** accepted (approved by Arda on 2026-11-21)
+- **Status:** accepted (approved by the owner on 2026-11-21)
 - **Date:** 2026-11-21
 
 ## Context

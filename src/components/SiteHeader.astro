@@ -67,8 +67,8 @@ const contact = "mailto:hello@f3nri.com";
 </header>
 
 <script>
-  // Spectrum light: a soft colour glow that glides after the pointer across the bar and
-  // stretches slightly with speed. Mouse only; skipped with
+  // Spectrum light: a soft band of colour, as tall as the bar, that glides after the pointer and
+  // stretches slightly with speed; the pill's rounded ends clip it into shape. Mouse only; skipped with
   // reduced motion. The loop runs only while the pointer is on the bar.
   const bar = document.querySelector<HTMLElement>("[data-spectrum]");
   const glow = bar?.querySelector<HTMLElement>(".spectrum__glow");
@@ -76,19 +76,16 @@ const contact = "mailto:hello@f3nri.com";
 
   if (bar && glow && canHover.matches) {
     let x = 0,
-      y = 0,
       tx = 0,
-      ty = 0,
       vx = 0;
     let frame = 0;
 
     const tick = () => {
       const dx = tx - x;
       x += dx * 0.16;
-      y += (ty - y) * 0.16;
       vx += (dx - vx) * 0.2;
       const stretch = 1 + Math.min(Math.abs(vx) / 200, 0.25);
-      glow.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${stretch}, ${1 / Math.sqrt(stretch)})`;
+      glow.style.transform = `translateX(${x}px) translateX(-50%) scaleX(${stretch})`;
       frame =
         Math.abs(dx) > 0.3 || Math.abs(vx) > 0.3 || bar.matches(":hover")
           ? requestAnimationFrame(tick)
@@ -98,14 +95,12 @@ const contact = "mailto:hello@f3nri.com";
     const aim = (event: PointerEvent) => {
       const box = bar.getBoundingClientRect();
       tx = event.clientX - box.left;
-      ty = event.clientY - box.top;
     };
 
     bar.addEventListener("pointerenter", (event) => {
       if (event.pointerType !== "mouse") return;
       aim(event);
       x = tx;
-      y = ty;
       vx = 0;
       bar.classList.add("is-lit");
       if (!frame) frame = requestAnimationFrame(tick);
@@ -153,12 +148,13 @@ const contact = "mailto:hello@f3nri.com";
   }
   .spectrum__glow {
     position: absolute;
+    /* full bar height (plus the blur, so its soft edge falls outside the clip): the pill's
+       rounded ends then shape the light when it reaches them */
     left: 0;
-    top: 0;
+    top: calc(-1 * var(--spectrum-blur));
+    bottom: calc(-1 * var(--spectrum-blur));
     width: var(--spectrum-width);
-    height: var(--spectrum-height);
     background: var(--spectrum-glow);
-    mask-image: var(--spectrum-mask);
     filter: blur(var(--spectrum-blur));
     mix-blend-mode: screen;
     opacity: 0;

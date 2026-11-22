@@ -13,6 +13,7 @@
   --color-bone: #ede6f2;
   --color-ash: #9a92ac;
   --color-signal: #ff6b8b;
+  --color-electric: #2e3bff; /* blue end of the gradients; used only in the spectrum glow */
 
   /* roles: use these in components, not the palette names */
   --bg: var(--color-void);
@@ -39,6 +40,24 @@
   --ghost-bg: rgb(255 244 252 / 0.14);
   --ghost-border: rgb(255 244 252 / 0.5);
   --glow-text: 0 0 40px rgb(255 228 250 / 0.35);
+
+  /* spectrum light that glides after the pointer on the header (docs/DESIGN.md, "SiteHeader").
+     Drawn for rightward motion: blue/violet trail on the left, pink/orange front on the right. */
+  --spectrum-width: 18rem;
+  --spectrum-height: 7rem;
+  --spectrum-blur: 1.25rem;
+  --spectrum-opacity: 0.7;
+  --spectrum-glow: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-electric) 55%, transparent) 22%,
+    color-mix(in srgb, var(--color-amethyst) 70%, transparent) 45%,
+    color-mix(in srgb, var(--color-neon) 70%, transparent) 70%,
+    color-mix(in srgb, var(--cw-horus-accent) 80%, transparent) 88%,
+    transparent 100%
+  );
+  --spectrum-mask: radial-gradient(closest-side, #000 35%, transparent);
+  --spectrum-fade: 400ms;
 
   /* type */
   --font-display: "Anton", Impact, "Arial Narrow", sans-serif;

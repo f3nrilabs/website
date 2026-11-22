@@ -15,7 +15,8 @@ Status: `todo` · `in-progress` · `review` · `blocked` · `done`
 | T-006 | About and Contact pages                                                         | OpenCode                             |                               | todo        | T-002      |
 | T-008 | Spectrum light on the header                                                    | Claude Code                          | claude/T-008-header-spectrum  | done        | T-002      |
 | T-007 | Browser tests: Playwright smoke and axe accessibility checks in CI              | Claude Code                          |                               | todo        | T-003      |
-| T-010 | A living spectrum light (spring, breath, shimmer, bloom)                        | OpenCode (architect)                 | opencode/T-010-alive-spectrum | in-progress | T-009      |
+| T-009 | Smaller, balanced spectrum light                                                | Claude Code                          | claude/T-009-spectrum-tune     | done        | T-008      |
+| T-010 | A living spectrum light (spring, breath, shimmer, bloom)                        | OpenCode (architect)                 | opencode/T-010-alive-spectrum | done        | T-009      |
 
 ## Notes
 

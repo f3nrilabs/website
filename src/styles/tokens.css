@@ -42,21 +42,20 @@
   --glow-text: 0 0 40px rgb(255 228 250 / 0.35);
 
   /* spectrum light that glides after the pointer on the header (docs/DESIGN.md, "SiteHeader").
-     Drawn for rightward motion: blue/violet trail on the left, pink/orange front on the right. */
-  --spectrum-width: 18rem;
-  --spectrum-height: 7rem;
-  --spectrum-blur: 1.25rem;
-  --spectrum-opacity: 0.7;
-  --spectrum-glow: linear-gradient(
-    90deg,
-    transparent 0%,
-    color-mix(in srgb, var(--color-electric) 55%, transparent) 22%,
-    color-mix(in srgb, var(--color-amethyst) 70%, transparent) 45%,
-    color-mix(in srgb, var(--color-neon) 70%, transparent) 70%,
-    color-mix(in srgb, var(--cw-horus-accent) 80%, transparent) 88%,
+     Symmetric: warm pink/orange core, violet and blue toward the edges. */
+  --spectrum-width: 11rem;
+  --spectrum-height: 4rem;
+  --spectrum-blur: 1rem;
+  --spectrum-opacity: 0.55;
+  --spectrum-glow: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--cw-horus-accent) 70%, transparent) 0%,
+    color-mix(in srgb, var(--color-neon) 60%, transparent) 35%,
+    color-mix(in srgb, var(--color-amethyst) 50%, transparent) 65%,
+    color-mix(in srgb, var(--color-electric) 35%, transparent) 85%,
     transparent 100%
   );
-  --spectrum-mask: radial-gradient(closest-side, #000 35%, transparent);
+  --spectrum-mask: radial-gradient(closest-side, #000 60%, transparent);
   --spectrum-fade: 400ms;
 
   /* code blocks in Markdown (Shiki "css-variables" theme, astro.config.mjs) */

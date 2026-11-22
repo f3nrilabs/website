@@ -43,17 +43,17 @@ Only these facts may be stated. Anything else is a `[TODO: Arda — …]`.
 
 ## Pages
 
-| Page          | Path                        | Content                                                                       | Status          |
-| ------------- | --------------------------- | ----------------------------------------------------------------------------- | --------------- |
-| Home          | `/`                         | Hero, disciplines, product blocks, latest research, contact call to action    | Planned (T-003) |
-| Products      | `/products`                 | One block per product, linking to its page                                    | Planned (T-005) |
-| Product page  | `/products/<slug>`          | Hero, problem, how it works, features, access call to action                  | Planned (T-005) |
-| Research      | `/research`                 | List of write-ups, newest first, with tags                                    | Built (T-004)   |
-| Research post | `/research/<slug>`          | One write-up in Markdown/MDX: title, date, summary, body, IOCs in code blocks | Built (T-004)   |
-| About         | `/about`                    | What f3nri does and how it works                                              | Built (T-006)   |
-| Contact       | `/contact`                  | Email, responsible disclosure note, security.txt link                         | Built (T-006)   |
-| 404           | any                         | Short not-found page                                                          | Done            |
-| security.txt  | `/.well-known/security.txt` | RFC 9116 contact file                                                         | Done            |
+| Page          | Path                        | Content                                                                            | Status          |
+| ------------- | --------------------------- | ---------------------------------------------------------------------------------- | --------------- |
+| Home          | `/`                         | Hero, disciplines, product blocks, latest research, contact call to action         | Planned (T-003) |
+| Products      | `/products`                 | One block per product, linking to its page                                         | Planned (T-005) |
+| Product page  | `/products/<slug>`          | Hero, problem, how it works, features, early access details, access call to action | Planned (T-005) |
+| Research      | `/research`                 | List of write-ups, newest first, with tags                                         | Built (T-004)   |
+| Research post | `/research/<slug>`          | One write-up in Markdown/MDX: title, date, summary, body, IOCs in code blocks      | Built (T-004)   |
+| About         | `/about`                    | What f3nri does and how it works                                                   | Built (T-006)   |
+| Contact       | `/contact`                  | Email, responsible disclosure note, security.txt link                              | Built (T-006)   |
+| 404           | any                         | Short not-found page                                                               | Done            |
+| security.txt  | `/.well-known/security.txt` | RFC 9116 contact file                                                              | Done            |
 
 ## Contact
 

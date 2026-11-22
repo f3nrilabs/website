@@ -34,6 +34,15 @@ features:
     title: Telegram, email, webhook
     text: Send alerts where your team already works.
 accessSubject: Horus early access
+earlyAccess:
+  includes:
+    - "Monitoring across the five CT log operators: Google, Cloudflare, Sectigo, DigiCert and Let's Encrypt."
+    - "Typosquat, homoglyph and combosquat scoring of every new domain against your brands."
+    - "Tracking through four states: CERT_ISSUED → DNS_LIVE → HTTP_LIVE → CONTENT_MATCH."
+    - "Alerts by Telegram, email or webhook."
+  audience: "Security, IT and brand-protection teams protecting a company's brand."
+  opens: "Access opens in waves on a fixed schedule. Each wave takes a small set of brands, so every deployment gets attention."
+  whatToSend: "In the email, say which brands or domains to protect and the alert channel you prefer: Telegram, email or webhook."
 ---
 
 Horus is in development. Tell us which brands you want to protect and we will reach out when your spot opens.

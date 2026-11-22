@@ -25,10 +25,7 @@ const contact = "mailto:hello@f3nri.com";
 
 <header class="site-header">
   <nav class="bar" aria-label="Main" data-spectrum>
-    <span class="spectrum" aria-hidden="true">
-      <span class="spectrum__ring"></span>
-      <span class="spectrum__ring spectrum__ring--b"></span>
-    </span>
+    <span class="spectrum" aria-hidden="true"></span>
     <a class="home" href="/" aria-label="f3nri home">
       <img src="/brand/mark-neon.svg" alt="" width="28" height="28" />
       <Wordmark size="sm" />
@@ -68,18 +65,47 @@ const contact = "mailto:hello@f3nri.com";
 </header>
 
 <script>
+  // Spectrum wave: a colour ripple that spreads out from the pointer when it lands on a
+  // link or button in the bar, or clicks. Mouse only; skipped with reduced motion.
   const bar = document.querySelector<HTMLElement>("[data-spectrum]");
+  const layer = bar?.querySelector<HTMLElement>(".spectrum");
   const canHover = window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)");
-  if (bar && canHover.matches) {
-    bar.addEventListener("pointermove", (event) => {
+
+  if (bar && layer && canHover.matches) {
+    let last = 0;
+    let target: Element | null = null;
+
+    const ripple = (event: PointerEvent) => {
+      const now = performance.now();
+      if (now - last < 280 || layer.childElementCount > 2) return;
+      last = now;
       const box = bar.getBoundingClientRect();
-      bar.style.setProperty("--mx", `${event.clientX - box.left}px`);
-      bar.style.setProperty("--my", `${event.clientY - box.top}px`);
-      bar.dataset.lit = "";
+      const wave = document.createElement("span");
+      wave.className = "spectrum__wave";
+      wave.style.left = `${event.clientX - box.left}px`;
+      wave.style.top = `${event.clientY - box.top}px`;
+      layer.append(wave);
+      wave
+        .animate(
+          [
+            { transform: "translate(-50%, -50%) scale(0.05)", opacity: 1 },
+            { transform: "translate(-50%, -50%) scale(0.75)", opacity: 1, offset: 0.65 },
+            { transform: "translate(-50%, -50%) scale(1)", opacity: 0 },
+          ],
+          { duration: 1100, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)" },
+        )
+        .finished.then(() => wave.remove());
+    };
+
+    bar.addEventListener("pointermove", (event) => {
+      const hit = (event.target as Element).closest("a, button, summary");
+      if (hit && hit !== target) ripple(event);
+      target = hit;
     });
     bar.addEventListener("pointerleave", () => {
-      delete bar.dataset.lit;
+      target = null;
     });
+    bar.addEventListener("pointerdown", ripple);
   }
 </script>
 
@@ -107,60 +133,23 @@ const contact = "mailto:hello@f3nri.com";
     -webkit-backdrop-filter: blur(16px);
     position: relative;
   }
-  /* spectrum: rippling colour rings around the pointer (docs/DESIGN.md, "SiteHeader") */
+  /* spectrum wave layer, clipped to the bar's pill shape */
   .spectrum {
     position: absolute;
     inset: 0;
     border-radius: inherit;
     overflow: hidden;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity var(--duration-base) var(--ease-out);
   }
-  .bar[data-lit] .spectrum {
-    opacity: 1;
-  }
-  .spectrum__ring {
+  .spectrum :global(.spectrum__wave) {
     position: absolute;
-    left: var(--mx, 50%);
-    top: var(--my, 50%);
-    width: var(--spectrum-size);
+    width: var(--spectrum-wave-size);
     aspect-ratio: 1;
     border-radius: 50%;
-    background: var(--spectrum);
-    -webkit-mask: var(--spectrum-mask);
-    mask: var(--spectrum-mask);
-    filter: blur(3px) saturate(1.2);
-    transform: translate(-50%, -50%);
-    transition:
-      left 90ms var(--ease-out),
-      top 90ms var(--ease-out);
-    animation:
-      spectrum-spin 2.4s linear infinite,
-      spectrum-breathe 1.6s ease-in-out infinite alternate;
-  }
-  .spectrum__ring--b {
-    width: calc(var(--spectrum-size) * 1.45);
-    animation-direction: reverse, alternate-reverse;
-    animation-duration: 1.7s, 1.2s;
-    opacity: 0.55;
-    filter: blur(8px) saturate(1.2);
-    transition:
-      left 220ms var(--ease-out),
-      top 220ms var(--ease-out);
-  }
-  @keyframes spectrum-spin {
-    to {
-      rotate: 1turn;
-    }
-  }
-  @keyframes spectrum-breathe {
-    from {
-      scale: 0.88;
-    }
-    to {
-      scale: 1.08;
-    }
+    background: var(--spectrum-wave);
+    filter: blur(2px) saturate(1.15);
+    transform: translate(-50%, -50%) scale(0.05);
+    will-change: transform, opacity;
   }
   .bar > :not(.spectrum) {
     position: relative;

@@ -41,21 +41,16 @@
   --ghost-border: rgb(255 244 252 / 0.5);
   --glow-text: 0 0 40px rgb(255 228 250 / 0.35);
 
-  /* spectrum rings that follow the pointer on the header (docs/DESIGN.md, "SiteHeader") */
-  --spectrum-size: 4.75rem;
-  --spectrum: conic-gradient(
-    var(--color-electric),
-    var(--color-amethyst),
-    var(--color-neon),
-    var(--cw-horus-accent),
-    var(--color-signal),
-    var(--color-electric)
-  );
-  --spectrum-mask: radial-gradient(
-    closest-side,
-    transparent 38%,
-    #000 52%,
-    #000 78%,
+  /* spectrum wave that ripples out from the pointer on the header (docs/DESIGN.md, "SiteHeader") */
+  --spectrum-wave-size: 34rem;
+  --spectrum-wave: radial-gradient(
+    circle closest-side,
+    color-mix(in srgb, var(--text-on-media) 6%, transparent) 0%,
+    color-mix(in srgb, var(--color-neon) 22%, transparent) 30%,
+    color-mix(in srgb, var(--color-electric) 55%, transparent) 55%,
+    color-mix(in srgb, var(--color-amethyst) 85%, transparent) 72%,
+    color-mix(in srgb, var(--color-neon) 95%, transparent) 85%,
+    var(--cw-horus-accent) 94%,
     transparent 100%
   );
 

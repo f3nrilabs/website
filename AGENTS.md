@@ -33,12 +33,14 @@ Merging to `main` deploys to production within about a minute. `main` must alway
 
 ## 2. Roles
 
-| Who                                       | Does                                                                                                    | Does not                                                     |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Arda** (owner)                          | Decides scope and priorities, writes or approves task files, approves design, merges PRs                |                                                              |
-| **Claude Code** (architect)               | Architecture, design system, layout and complex components, specs for others, reviews every OpenCode PR | Merge to `main`                                              |
-| **OpenCode** (builder)                    | Pages, components and content from an approved task file, refactors, tests                              | Change architecture, tokens or dependencies; merge to `main` |
-| **Other agents** (Codex, Command Code, …) | Single-file tasks explicitly assigned to them                                                           | Anything else                                                |
+| Who                                        | Does                                                                                                   | Does not                                                     |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| **Arda** (owner)                           | Decides scope and priorities, writes or approves task files, approves design, merges PRs               |                                                              |
+| **Architect** (Claude Code, see below)     | Architecture, design system, layout and complex components, specs for others, reviews every builder PR | Merge to `main`                                              |
+| **OpenCode** (builder: agent or sub-agent) | Pages, components and content from an approved task file, refactors, tests                             | Change architecture, tokens or dependencies; merge to `main` |
+| **Other agents** (Codex, Command Code, …)  | Single-file tasks explicitly assigned to them                                                          | Anything else                                                |
+
+The architect role is held by Claude Code, or by the agent Arda assigns to it (recorded in `.agents/STATE.md`, Notes). A PR written by the builder sub-agent counts as reviewed when the architect agent reviews it.
 
 Every PR is reviewed by an agent other than its author before Arda merges it.
 

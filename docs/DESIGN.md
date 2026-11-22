@@ -89,7 +89,7 @@ Rules:
 
 - **Home:** Hero (brand) → three discipline cards → product ColorBlock per product → "From the lab" (latest research or an honest empty state) → "Talk to us." ColorBlock (dark) → footer.
 - **Product page:** Hero (product colorway, product name in `--text-giant`, status pill) → problem (h2 left, two paragraphs right) → "How it works" numbered steps → feature cards → access ColorBlock (product colorway) → footer.
-- **Content pages** (research post, about, contact): no gradient hero; h1 in `--text-section` on the plain background, then body content at `--content-max`.
+- **Content pages** (research post, about, contact): no gradient hero; h1 in `--text-section` on the plain background, then body content at `--content-max`. Long-form text (a research post body) is limited to `--measure` and styled by the `Prose` component: Inter at `--text-lg`, `--leading-body`, h2/h3 in Inter 700 (not Anton), links in `--accent` with underline, inline code and code blocks in `--font-mono` on `--surface` with `--radius-md`, code blocks and tables scroll horizontally inside their own box.
 
 ## Contact
 
@@ -112,6 +112,7 @@ Only Claude Code changes `tokens.css`, and every change is recorded in this file
 
 ### Change log
 
+- **2026-11-22:** added `--measure` (68ch line length for long-form text) and the `--astro-code-*` tokens; Markdown code blocks use Shiki's `css-variables` theme so their colors come from the palette (T-004).
 - **2026-11-22:** added `--color-electric` and the `--spectrum-*` tokens for the header spectrum light (T-008).
 - **2026-11-21:** `--text-display` max lowered from 9.75rem to 8.5rem so the two-line home headline does not break into three lines on 1440 px and wider screens.
 - **2026-11-21:** every h2 now defaults to `--text-section` in `global.css`; a section heading without its own size was rendering at the browser default.

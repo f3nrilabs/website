@@ -59,6 +59,19 @@
   --spectrum-mask: radial-gradient(closest-side, #000 35%, transparent);
   --spectrum-fade: 400ms;
 
+  /* code blocks in Markdown (Shiki "css-variables" theme, astro.config.mjs) */
+  --astro-code-foreground: var(--color-bone);
+  --astro-code-background: var(--color-obsidian);
+  --astro-code-token-comment: var(--color-ash);
+  --astro-code-token-keyword: var(--color-neon);
+  --astro-code-token-string: var(--cw-horus-accent);
+  --astro-code-token-string-expression: var(--cw-horus-accent);
+  --astro-code-token-constant: var(--color-neon);
+  --astro-code-token-function: var(--color-bone);
+  --astro-code-token-parameter: var(--color-bone);
+  --astro-code-token-punctuation: var(--color-ash);
+  --astro-code-token-link: var(--color-neon);
+
   /* type */
   --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -94,6 +107,7 @@
 
   /* layout */
   --content-max: 72rem;
+  --measure: 68ch; /* line length of long-form text (research posts) */
   --content-wide: 87rem;
   --header-height: 4.75rem; /* sticky header incl. its top offset; heroes slide under it */
   --gutter: clamp(1rem, 4vw, 2.5rem);

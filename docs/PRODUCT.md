@@ -76,4 +76,4 @@ No forms. All contact goes to `hello@f3nri.com` through `mailto:` links (an emai
 ## Open questions for Arda
 
 - [TODO: Arda — will the team members be named on the About page, or stay anonymous?]
-- [TODO: Arda — PGP key for the contact page, yes or no]
+- PGP: yes. Public key for `hello@f3nri.com` at `/.well-known/pgp.txt`, fingerprint `4941 B770 C40C E520 F81C 8184 2780 DDAB D676 7400`; referenced from `security.txt` and the contact page (T-012).

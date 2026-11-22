@@ -1,0 +1,119 @@
+---
+import Base from "../layouts/Base.astro";
+import Button from "../components/Button.astro";
+import Card from "../components/Card.astro";
+---
+
+<Base
+  current="about"
+  title="About"
+  description="f3nri is an independent security research team. We study threats, build the tools to catch them, and publish what we find."
+>
+  <article class="page">
+    <header class="page__head">
+      <h1 class="page__title">About</h1>
+      <p class="page__lead">
+        f3nri is an independent security research team. We study threats, build the tools to catch
+        them, and publish what we find.
+      </p>
+    </header>
+
+    <section aria-labelledby="what-title">
+      <h2 id="what-title">What we do.</h2>
+      <div class="grid">
+        <Card label="01 / research" title="Research">
+          Threat analysis and write-ups on phishing, impersonation and the infrastructure behind
+          them, with the evidence attached.
+        </Card>
+        <Card label="02 / tools" title="Tools">
+          Software that turns what we learn into detection: monitoring, scanning and automation for
+          security teams.
+        </Card>
+        <Card label="03 / intel" title="Intel">
+          Indicators, patterns and context that defenders can act on, written plainly and published
+          openly.
+        </Card>
+      </div>
+    </section>
+
+    <section aria-labelledby="how-title">
+      <h2 id="how-title">How we work.</h2>
+      <div class="prose">
+        <p>
+          Research comes first. We study threats and publish what we find, with the evidence
+          attached.
+        </p>
+        <p>
+          What we learn then goes into the tools we build. A pattern documented once becomes
+          something our tooling can look for the next time it appears.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="team-title">
+      <h2 id="team-title">The team.</h2>
+      <div class="prose">
+        <p>
+          Research, tools and intel are published under the single name f3nri. Members are not named
+          individually.
+        </p>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="talk-title">
+      <h2 id="talk-title">Talk to us.</h2>
+      <Button href="mailto:hello@f3nri.com">Email us</Button>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: var(--space-24) var(--gutter) 0;
+  }
+  .page__title {
+    font-size: var(--text-section);
+  }
+  .page__head,
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .page__lead {
+    margin: 0;
+    max-width: 60ch;
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+    gap: var(--space-6);
+  }
+  .prose {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .prose p {
+    margin: 0;
+    max-width: 60ch;
+    font-size: var(--text-lg);
+  }
+  .closing {
+    align-items: flex-start;
+  }
+
+  @media (max-width: 48rem) {
+    .page {
+      gap: var(--space-16);
+      padding-top: var(--space-16);
+    }
+  }
+</style>

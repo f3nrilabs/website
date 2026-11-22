@@ -18,7 +18,7 @@ They are technical and skeptical. The site earns trust through precise writing, 
 
 ## Approved copy
 
-Use these exactly; change only with Arda's approval.
+Use these exactly; change only with the owner's approval.
 
 - **Home hero h1:** "Break the chain before it breaks you." (a nod to Fenrir, the chain-breaking wolf)
 - **Home hero lead:** "f3nri is an independent security research team. We study threats, build the tools to catch them, and publish what we find."
@@ -33,7 +33,7 @@ Use these exactly; change only with Arda's approval.
 
 ### Horus (facts for copy)
 
-Only these facts may be stated. Anything else is a `[TODO: Arda — …]`.
+Only these facts may be stated. Anything else is a `[TODO: the owner — …]`.
 
 - Catches typosquat, homoglyph and combosquat domains of a brand.
 - Reads Certificate Transparency logs from Google, Cloudflare, Sectigo, DigiCert and Let's Encrypt, and scores every new domain against the registered brands.
@@ -63,7 +63,7 @@ No forms. All contact goes to `hello@f3nri.com` through `mailto:` links (an emai
 
 - English only.
 - Every claim about a finding is backed by evidence in the post itself.
-- No invented content. Unknowns stay visible as `[TODO: …]` until Arda fills them.
+- No invented content. Unknowns stay visible as `[TODO: …]` until the owner fills them.
 - No empty "coming soon" products. A product appears on the site when it has a real page.
 
 ## Non-goals (for now)
@@ -73,7 +73,7 @@ No forms. All contact goes to `hello@f3nri.com` through `mailto:` links (an emai
 - No analytics or tracking of any kind.
 - No newsletter until there is content to send.
 
-## Open questions for Arda
+## Open questions for the owner
 
-- [TODO: Arda — will the team members be named on the About page, or stay anonymous?]
+- [TODO: the owner — will the team members be named on the About page, or stay anonymous?]
 - PGP: yes. Public key for `hello@f3nri.com` at `/.well-known/pgp.txt`, fingerprint `4941 B770 C40C E520 F81C 8184 2780 DDAB D676 7400`; referenced from `security.txt` and the contact page (T-012).

@@ -7,7 +7,7 @@
 
 ## Goal
 
-Arda found the T-008 light too big and unbalanced on the live site. Make it smaller, dimmer and symmetric.
+The owner found the T-008 light too big and unbalanced on the live site. Make it smaller, dimmer and symmetric.
 
 ## Acceptance criteria
 

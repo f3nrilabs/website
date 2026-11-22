@@ -1,13 +1,13 @@
 # T-010: A living spectrum light
 
 - **Owner:** OpenCode (architect)
-- **Reviewer:** Arda (approves in chat)
+- **Reviewer:** the owner (approves in chat)
 - **Branch:** `opencode/T-010-alive-spectrum`
 - **Depends on:** T-009
 
 ## Goal
 
-Arda finds the header light artificial and lifeless ("çok yapay ve cansız"). Keep the T-009 look (small, dim, symmetric band) but make it feel alive: organic motion, idle breathing, a landing moment.
+The owner finds the header light artificial and lifeless ("çok yapay ve cansız"). Keep the T-009 look (small, dim, symmetric band) but make it feel alive: organic motion, idle breathing, a landing moment.
 
 ## Acceptance criteria
 
@@ -23,7 +23,7 @@ Arda finds the header light artificial and lifeless ("çok yapay ve cansız"). K
 ## Spec
 
 - Files: `src/components/SiteHeader.astro` (script + one CSS block), `src/styles/tokens.css` (five new `--spectrum-*` motion tokens), `docs/DESIGN.md` (component row + change log).
-- Motion is felt, not screenshot-able; the PR carries one 1280 px header frame as proof of look, Arda judges the feel live.
+- Motion is felt, not screenshot-able; the PR carries one 1280 px header frame as proof of look, the owner judges the feel live.
 
 ## Out of scope
 

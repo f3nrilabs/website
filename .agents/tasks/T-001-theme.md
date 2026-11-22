@@ -1,13 +1,13 @@
 # T-001: Theme rules, tokens, fonts and gradient images
 
 - **Owner:** Claude Code
-- **Reviewer:** Arda (design approval)
+- **Reviewer:** the owner (design approval)
 - **Branch:** `claude/T-001-theme`
 - **Depends on:** none
 
 ## Goal
 
-Turn the theme Arda approved on 2026-11-21 into rules and tokens every agent can build from without making design decisions.
+Turn the theme the owner approved on 2026-11-21 into rules and tokens every agent can build from without making design decisions.
 
 ## Acceptance criteria
 
@@ -25,5 +25,5 @@ Building the components and pages (T-002, T-003, T-005).
 
 ## Notes and follow-ups
 
-- Reference: Arda approved a dark mock-up of the home page and the Horus page (shared privately). The rules here are written from it, so the mock-up itself is not needed to build.
+- Reference: the owner approved a dark mock-up of the home page and the Horus page (shared privately). The rules here are written from it, so the mock-up itself is not needed to build.
 - Gradients are rendered without grain; grain is the `.grain` CSS overlay. That keeps each image around 15 KB instead of 270 KB.

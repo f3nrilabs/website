@@ -25,4 +25,4 @@ Give every product its own page from one template, starting with Horus, plus a `
 
 ## Out of scope
 
-New colorways or tokens; screenshots or diagrams of the Horus UI (follow-up when Arda provides them).
+New colorways or tokens; screenshots or diagrams of the Horus UI (follow-up when the owner provides them).

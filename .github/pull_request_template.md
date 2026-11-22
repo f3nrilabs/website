@@ -18,7 +18,7 @@ T-XXX: <title> (`.agents/tasks/T-XXX-….md`)
 
 ## Placeholders and open questions
 
-<!-- Every [TODO: …] added, and anything Arda needs to decide. Write "none" if none. -->
+<!-- Every [TODO: …] added, and anything the owner needs to decide. Write "none" if none. -->
 
 ## Rule check (AGENTS.md section 4)
 

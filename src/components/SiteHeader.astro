@@ -1,7 +1,10 @@
 ---
 /**
- * Sticky pill navigation (docs/DESIGN.md, "SiteHeader"). No JavaScript:
- * under 48rem the section links move into a <details> menu.
+ * Sticky pill navigation (docs/DESIGN.md, "SiteHeader").
+ * Under 48rem the section links move into a <details> menu (no JavaScript needed).
+ * On devices with a mouse, a spectrum glow follows the pointer across the bar: the only
+ * script on the site, a progressive enhancement that does nothing on touch screens or
+ * with reduced motion.
  */
 import Button from "./Button.astro";
 import Wordmark from "./Wordmark.astro";
@@ -21,7 +24,7 @@ const contact = "mailto:hello@f3nri.com";
 ---
 
 <header class="site-header">
-  <nav class="bar" aria-label="Main">
+  <nav class="bar" aria-label="Main" data-spectrum>
     <a class="home" href="/" aria-label="f3nri home">
       <img src="/brand/mark-neon.svg" alt="" width="28" height="28" />
       <Wordmark size="sm" />
@@ -60,6 +63,21 @@ const contact = "mailto:hello@f3nri.com";
   </nav>
 </header>
 
+<script>
+  const bar = document.querySelector<HTMLElement>("[data-spectrum]");
+  const canHover = window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)");
+  if (bar && canHover.matches) {
+    bar.addEventListener("pointermove", (event) => {
+      const box = bar.getBoundingClientRect();
+      bar.style.setProperty("--mx", `${event.clientX - box.left}px`);
+      bar.dataset.lit = "";
+    });
+    bar.addEventListener("pointerleave", () => {
+      delete bar.dataset.lit;
+    });
+  }
+</script>
+
 <style>
   .site-header {
     position: sticky;
@@ -82,6 +100,40 @@ const contact = "mailto:hello@f3nri.com";
     border-radius: var(--radius-pill);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    position: relative;
+  }
+  /* spectrum glow: soft light inside the bar plus a brighter ring on its border */
+  .bar::before,
+  .bar::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: var(--spectrum);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+  .bar::before {
+    filter: blur(10px);
+  }
+  .bar::after {
+    padding: 1px;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  .bar[data-lit]::before {
+    opacity: 0.85;
+  }
+  .bar[data-lit]::after {
+    opacity: 1;
+  }
+  .bar > * {
+    position: relative;
+    z-index: 1;
   }
   .home {
     display: flex;

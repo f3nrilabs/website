@@ -7,7 +7,7 @@ export default defineConfig({
   site: "https://f3nri.com",
   output: "static",
   trailingSlash: "never",
-  build: { format: "file" },
+  build: { format: "directory" },
   integrations: [sitemap()],
   // Code blocks take their colors from the --astro-code-* tokens in src/styles/tokens.css.
   markdown: { shikiConfig: { theme: "css-variables" } },
